@@ -2,22 +2,53 @@ package com.kolmakova.entities;
 
 public class Passenger {
 
-    private final int id;
-    private final String name;
-    private final String surname;
-    private final String sex;
-    private final String dateOfBirth;
-    private final String typeOfDocument;
-    private final String seriesOfDocument;
+    private int id;
+    private String name;
+    private String surname;
+    private String sex;
+    private String birthDate;
+    private String documentType;
+    private String documentSeries;
+
+    public Passenger() {
+    }
 
     public Passenger(int id, String name, String surname, String sex, String dateOfBirth, String typeOfDocument, String seriesOfDocument) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
-        this.dateOfBirth = dateOfBirth;
-        this.typeOfDocument = typeOfDocument;
-        this.seriesOfDocument = seriesOfDocument;
+        this.birthDate = dateOfBirth;
+        this.documentType = typeOfDocument;
+        this.documentSeries = seriesOfDocument;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public void setDocumentSeries(String documentSeries) {
+        this.documentSeries = documentSeries;
     }
 
     public int getId() {
@@ -36,16 +67,16 @@ public class Passenger {
         return sex;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public String getTypeOfDocument() {
-        return typeOfDocument;
+    public String getDocumentType() {
+        return documentType;
     }
 
-    public String getSeriesOfDocument() {
-        return seriesOfDocument;
+    public String getDocumentSeries() {
+        return documentSeries;
     }
 
     @Override
@@ -55,9 +86,9 @@ public class Passenger {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", sex='" + sex + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", typeOfDocument='" + typeOfDocument + '\'' +
-                ", seriesOfDocument='" + seriesOfDocument + '\'' +
+                ", dateOfBirth='" + birthDate + '\'' +
+                ", typeOfDocument='" + documentType + '\'' +
+                ", seriesOfDocument='" + documentSeries + '\'' +
                 '}';
     }
 }

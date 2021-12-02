@@ -1,6 +1,6 @@
 package com.kolmakova.utils;
 
-import com.kolmakova.dao.JDBC;
+import com.kolmakova.db.JDBC;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
 

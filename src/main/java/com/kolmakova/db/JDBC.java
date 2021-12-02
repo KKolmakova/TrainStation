@@ -1,4 +1,4 @@
-package com.kolmakova.dao;
+package com.kolmakova.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,17 +9,12 @@ public class JDBC {
 
     private Connection connection;
 
-    public Connection getConnection() {
-        return connection;
-    }
-
     public JDBC(String userName, String userPassword, String dbURL) {
         connection = null;
         try {
             connection = DriverManager.getConnection(dbURL, userName, userPassword);
-            System.out.println("Connection created");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -28,6 +23,6 @@ public class JDBC {
     }
 
     public void executeSetRequest(String query) throws SQLException {
-        connection.createStatement().executeQuery(query);
+        connection.createStatement().executeUpdate(query);
     }
 }
