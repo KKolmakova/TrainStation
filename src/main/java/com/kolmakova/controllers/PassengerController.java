@@ -26,7 +26,7 @@ public class PassengerController {
     @GetMapping
     public String allPassengers(Model model) throws SQLException {
         model.addAttribute("passenger", passengerComponent.getAllPassengers());
-        return "passenger/all-passengers";
+        return "passenger/all";
     }
 
     @GetMapping("/new")

@@ -13,16 +13,23 @@ public class TrainComponent {
 
     private final EntitiesUtils entitiesUtils;
     private final JDBC trainStation;
+    private ArrayList<Train> trains;
 
-    public TrainComponent() {
+    public TrainComponent() throws SQLException {
         entitiesUtils = new EntitiesUtils();
         String urlToDB = "jdbc:mysql://localhost:3306/TrainStation";
         String userName = "root";
         String userPassword = "root";
         trainStation = new JDBC(userName, userPassword, urlToDB);
+        trains = entitiesUtils.getTrains("SELECT * FROM Train", trainStation);
     }
 
     public ArrayList<Train> getAllTrains() throws SQLException {
-        return entitiesUtils.getTrains("SELECT * FROM Train", trainStation);
+        return trains;
+    }
+
+    public ArrayList<Train> find(Train train) throws SQLException {
+        trains = entitiesUtils.getTrains("SELECT * FROM Train WHERE arrival_place='".concat(train.getArrivalPlace()) + "'", trainStation);
+        return trains;
     }
 }

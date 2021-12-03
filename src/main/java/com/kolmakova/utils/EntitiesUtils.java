@@ -19,7 +19,7 @@ public class EntitiesUtils {
                     resultSet.getInt("number"),
                     resultSet.getString("departure_time"),
                     resultSet.getString("arrival_place"),
-                    resultSet.getString("arrival_time")
+                    resultSet.getString("departure_date")
             );
             trains.add(train);
         }

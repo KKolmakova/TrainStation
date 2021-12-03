@@ -13,14 +13,14 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(int id, String name, String surname, String sex, String dateOfBirth, String typeOfDocument, String seriesOfDocument) {
+    public Passenger(int id, String name, String surname, String sex, String birthDate, String documentType, String documentSeries) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
-        this.birthDate = dateOfBirth;
-        this.documentType = typeOfDocument;
-        this.documentSeries = seriesOfDocument;
+        this.birthDate = birthDate;
+        this.documentType = documentType;
+        this.documentSeries = documentSeries;
     }
 
     public void setId(int id) {
@@ -86,9 +86,9 @@ public class Passenger {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", sex='" + sex + '\'' +
-                ", dateOfBirth='" + birthDate + '\'' +
-                ", typeOfDocument='" + documentType + '\'' +
-                ", seriesOfDocument='" + documentSeries + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", documentType='" + documentType + '\'' +
+                ", documentSeries='" + documentSeries + '\'' +
                 '}';
     }
 }

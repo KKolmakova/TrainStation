@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select train</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/train}" th:object="${train}">
+    <label for="arrival_place">Enter arrival place: </label>
+    <input type="text" th:field="*{arrivalPlace}" id="arrival_place"/><br>
+
+    <label for="departure_time">Enter departure time: </label>
+    <input type="text" th:field="*{departureTime}" id="departure_time"/><br>
+
+    <label for="departure_date">Enter departure date: </label>
+    <input type="text" th:field="*{departureDate}" id="departure_date"/><br>
+
+    <input type="submit" value="Find"/>
+</form>
+</body>
+</html>

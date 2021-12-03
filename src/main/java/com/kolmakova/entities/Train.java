@@ -2,18 +2,41 @@ package com.kolmakova.entities;
 
 public class Train {
 
-    private final int id;
-    private final int number;
-    private final String departureTime;
-    private final String arrivalPlace;
-    private final String arrivalTime;
+    private int id;
+    private int number;
+    private String departureTime;
+    private String arrivalPlace;
+    private String departureDate;
 
-    public Train(int id, int number, String departureTime, String arrivalPlace, String arrivalTime) {
+    public Train() {
+    }
+
+    public Train(int id, int number, String departureTime, String arrivalPlace, String departureDate) {
         this.id = id;
         this.number = number;
         this.departureTime = departureTime;
         this.arrivalPlace = arrivalPlace;
-        this.arrivalTime = arrivalTime;
+        this.departureDate = departureDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public void setArrivalPlace(String arrivalPlace) {
+        this.arrivalPlace = arrivalPlace;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
     }
 
     public int getId() {
@@ -32,8 +55,8 @@ public class Train {
         return arrivalPlace;
     }
 
-    public String getArrivalTime() {
-        return arrivalTime;
+    public String getDepartureDate() {
+        return departureDate;
     }
 
     @Override
@@ -43,7 +66,7 @@ public class Train {
                 ", number=" + number +
                 ", departureTime='" + departureTime + '\'' +
                 ", arrivalPlace='" + arrivalPlace + '\'' +
-                ", arrivalTime='" + arrivalTime + '\'' +
+                ", departureDate='" + departureDate + '\'' +
                 '}';
     }
 }
