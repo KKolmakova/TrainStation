@@ -1,15 +1,13 @@
 package com.kolmakova.controllers;
 
 import com.kolmakova.components.TrainComponent;
-import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
+import com.kolmakova.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
@@ -17,34 +15,24 @@ import java.sql.SQLException;
 @RequestMapping("/train")
 public class TrainController {
 
-    private final TrainComponent trainComponent;
-
     @Autowired
-    public TrainController(TrainComponent trainComponent) {
-        this.trainComponent = trainComponent;
-    }
+    private TrainService trainService;
 
     @GetMapping
     public String allTrains(Model model) throws SQLException {
-        model.addAttribute("train", trainComponent.getAllTrains());
+        model.addAttribute("train", trainService.list());
         return "train/all";
     }
 
-    @GetMapping("/select")
-    public String selectedTrains(Model model){
-        model.addAttribute("train", new Train());
-        return "train/select";
-    }
-
-    @PostMapping()
-    public String find(@ModelAttribute("train") Train train) throws SQLException {
-        trainComponent.find(train);
-        return "redirect:/train";
-    }
-
-//    @GetMapping("/trains")
-//    public String show(@PathVariable("id") int id, Model model) throws SQLException {
-//        model.addAttribute("train", execute. getAllTrains());
-//        return "train/show";
+//    @GetMapping("/select")
+//    public String selectedTrains(Model model){
+//        return "train/select";
+//    }
+//
+//    @PostMapping("/find")
+//    public String find(Model model, Train train) throws SQLException {
+//        model.addAttribute("find",true);
+//        model.addAttribute("train",trainComponent.findSelectedTrains(train));
+//        return "/train/select";
 //    }
 }

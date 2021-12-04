@@ -1,11 +1,25 @@
 package com.kolmakova.entities;
 
+import org.hibernate.annotations.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Table(appliesTo = "Train")
+@Entity
 public class Train {
 
+    @Id
+    @GeneratedValue
     private int id;
     private int number;
+    @Column(name = "departure_time")
     private String departureTime;
+    @Column(name = "arrival_place")
     private String arrivalPlace;
+    @Column(name = "departure_date")
     private String departureDate;
 
     public Train() {

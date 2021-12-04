@@ -5,17 +5,23 @@
     <title>Select train</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/train}" th:object="${train}">
+<form th:method="POST" action="find">
     <label for="arrival_place">Enter arrival place: </label>
-    <input type="text" th:field="*{arrivalPlace}" id="arrival_place"/><br>
+    <input id="arrival_place" name="arrivalPlace" type="text"/><br>
 
     <label for="departure_time">Enter departure time: </label>
-    <input type="text" th:field="*{departureTime}" id="departure_time"/><br>
+    <input id="departure_time" name="departureTime" type="text"/><br>
 
     <label for="departure_date">Enter departure date: </label>
-    <input type="text" th:field="*{departureDate}" id="departure_date"/><br>
+    <input id="departure_date" name="departureDate" type="text"/><br>
 
     <input type="submit" value="Find"/>
 </form>
+<th:block th:if="${find}">
+    <div th:each="train: ${train}">
+        <p th:text="${train.toString()}"></p>
+        <button>Choose</button>
+    </div>
+</th:block>
 </body>
 </html>

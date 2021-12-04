@@ -28,7 +28,7 @@ public class TrainComponent {
         return trains;
     }
 
-    public ArrayList<Train> find(Train train) throws SQLException {
+    public ArrayList<Train> findSelectedTrains(Train train) throws SQLException {
         trains = entitiesUtils.getTrains("SELECT * FROM Train WHERE arrival_place='".concat(train.getArrivalPlace()) + "'", trainStation);
         return trains;
     }
