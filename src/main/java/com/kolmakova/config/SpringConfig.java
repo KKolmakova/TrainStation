@@ -38,7 +38,7 @@ public class SpringConfig implements WebMvcConfigurer{
     private ApplicationContext applicationContext;
     @Autowired
     private Environment env;
-    private final static String propertyPackage = "com.kolmakova";
+    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova";
 
     @Bean
     public DataSource dataSource() {
@@ -66,7 +66,7 @@ public class SpringConfig implements WebMvcConfigurer{
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan(new String[] { propertyPackage });
+        factoryBean.setPackagesToScan(new String[] {COMPONENT_SCAN_PACKAGE});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(getHibernateProperty());
         factoryBean.afterPropertiesSet();
@@ -76,19 +76,20 @@ public class SpringConfig implements WebMvcConfigurer{
 
     @Autowired
     @Bean
-    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactoryBean) {
+    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
 
         return transactionManager;
     }
 
+    @Autowired
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan(propertyPackage);
+        entityManagerFactoryBean.setPackagesToScan(COMPONENT_SCAN_PACKAGE);
         entityManagerFactoryBean.setJpaProperties(getHibernateProperty());
 
         return entityManagerFactoryBean;
@@ -104,10 +105,11 @@ public class SpringConfig implements WebMvcConfigurer{
         return templateResolver;
     }
 
+    @Autowired
     @Bean
-    public SpringTemplateEngine templateEngine() {
+    public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setTemplateResolver(templateResolver);
         templateEngine.setEnableSpringELCompiler(true);
 
         return templateEngine;
@@ -116,7 +118,7 @@ public class SpringConfig implements WebMvcConfigurer{
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        resolver.setTemplateEngine(templateEngine());
+        resolver.setTemplateEngine(templateEngine(templateResolver()));
         registry.viewResolver(resolver);
     }
 }

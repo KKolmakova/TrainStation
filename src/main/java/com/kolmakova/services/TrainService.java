@@ -16,4 +16,8 @@ public class TrainService {
     public List<Train> list(){
         return trainRepository.findAll();
     }
+
+    public List<Train> getByArrivalPlace(String arrivalPlace){
+        return trainRepository.findTrainByArrival(arrivalPlace);
+    }
 }
