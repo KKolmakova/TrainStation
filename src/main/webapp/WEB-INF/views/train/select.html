@@ -1,27 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Select train</title>
+    <title>Train Station</title>
 </head>
 <body>
-<form th:method="POST" action="find">
-    <label for="arrival_place">Enter arrival place: </label>
-    <input id="arrival_place" name="arrivalPlace" type="text"/><br>
+    <form th:method="POST" action="find">
+        <h3>Let's find the right train</h3>
+        <label for="arrival_place">Enter arrival place: </label>
+        <input id="arrival_place" name="arrivalPlace" type="text"/><br>
 
-    <label for="departure_time">Enter departure time: </label>
-    <input id="departure_time" name="departureTime" type="text"/><br>
+        <label for="departure_time">Enter departure time: </label>
+        <input id="departure_time" name="departureTime" type="text"/><br>
 
-    <label for="departure_date">Enter departure date: </label>
-    <input id="departure_date" name="departureDate" type="text"/><br>
+        <label for="departure_date">Enter departure date: </label>
+        <input id="departure_date" name="departureDate" type="text"/><br>
 
-    <input type="submit" value="Find"/>
-</form>
-<th:block th:if="${find}">
-    <div th:each="train: ${train}">
-        <p th:text="${train.toString()}"></p>
-        <button>Choose</button>
-    </div>
-</th:block>
+        <input value="Find" type="submit"/>
+    </form>
+
+    <th:block th:if="${find}">
+        <input hidden name="trains" th:value="${train}"/>
+        <h3>Here's what was found</h3>
+        <div th:each="train: ${train}">
+            <form th:method="POST" action="choose">
+            <p th:text="${train.toString()}"></p>
+                <div th:each="id: ${trainsId}">
+                    <input hidden name="trainsId" th:value="${id}"/>
+                </div>
+            <input hidden name="id" th:value="${train.getId()}">
+            <input value="Choose" type="submit"/>
+            </form>
+        </div>
+    </th:block>
+
+    <th:block th:if="${choose}">
+       <form th:method="POST" action="newPassenger">
+           <h3>Registration of a check</h3>
+           <input hidden th:field="${train.id}" th:value="${train.getId()}">
+           <p th:text="${train.toString()}"></p>
+
+           <label for="name">Enter name: </label>
+           <input id="name" name="name" type="text"/><br>
+
+           <label for="surname">Enter surname: </label>
+           <input id="surname" name="surname" type="text"/><br>
+
+           <label for="sex">Enter sex: </label>
+           <input id="sex" name="sex" type="text"/><br>
+
+           <label for="birth_date">Enter birth date: </label>
+           <input id="birth_date" name="birthDate" type="text"/><br>
+
+           <label for="document_type">Enter document type: </label>
+           <input id="document_type" name="documentType" type="text"/><br>
+
+           <label for="document_series">Enter document series: </label>
+           <input id="document_series" name="documentSeries" type="text"/><br>
+
+           <input type="submit" value="Register"/>
+
+           <h3>Here's what was found</h3>
+           <div th:each="train: ${trains}">
+               <form th:method="POST" action="choose">
+                   <p th:text="${train.toString()}"></p>
+               </form>
+           </div>
+        </form>
+    </th:block>
+
+    <th:block th:if="${newPassenger}">
+        <form th:method="POST" action="choose">
+            <div th:each="passenger: ${passenger}">
+                <p th:text="${passenger.toString()}"></p>
+            </div>
+        </form>
+    </th:block>
 </body>
 </html>

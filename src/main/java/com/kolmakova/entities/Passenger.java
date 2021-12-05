@@ -1,13 +1,27 @@
 package com.kolmakova.entities;
 
+import org.hibernate.annotations.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Table(appliesTo = "Passenger")
+@Entity
 public class Passenger {
 
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String surname;
     private String sex;
+    @Column(name = "birth_date")
     private String birthDate;
+    @Column(name = "document_type")
     private String documentType;
+    @Column(name = "document_series")
     private String documentSeries;
 
     public Passenger() {
