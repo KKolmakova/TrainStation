@@ -2,7 +2,6 @@ package com.kolmakova.controllers;
 
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
-import com.kolmakova.dto.ControllerDTO;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,41 +21,35 @@ public class TrainController {
     private PassengerService passengerService;
 
     @GetMapping("/select")
-    public String selectTrains(){
+    public String selectTrains() {
         return "train/select";
     }
 
     @PostMapping("/find")
     public String findSelected(Model model, Train train) {
         List<Train> trains = trainService.getByArrivalPlace(train.getArrivalPlace());
-        model.addAttribute("find",true);
-        model.addAttribute("train", trains);
+        model.addAttribute("find", true);
+        model.addAttribute("trains", trains);
         model.addAttribute("trainsId", trainService.getTrainsId(trains));
 
         return "train/select";
     }
 
     @PostMapping("/choose")
-    public String chooseTrain(Model model, Train train, @RequestParam(value="trainsId") Integer[] trainsId) {
-        model.addAttribute("choose",true);
-        model.addAttribute("train", trainService.getTrainById(train.getId()));
+    public String chooseTrain(Model model, Train train, @RequestParam(value = "trainsId") Integer[] trainsId) {
+        model.addAttribute("choose", true);
         model.addAttribute("trains", trainService.getTrainsByIdes(trainsId));
+        model.addAttribute("train", trainService.getTrainById(train.getId()));
 
-        return "/train/select";
+        return "train/select";
     }
 
     @PostMapping("/newPassenger")
-    public String enterNewPassenger(Model model, ControllerDTO controllerDTO) {
-        model.addAttribute("train", trainService.getTrainById(controllerDTO.getTrain().getId()));
+    public String enterNewPassenger(Model model, Passenger passenger, Train train) {
         model.addAttribute("newPassenger", true);
+        model.addAttribute("passenger", passenger);
+        model.addAttribute("train", trainService.getTrainById(train.getId()));
 
-        return "/train/select";
-    }
-
-    @PostMapping("/create")
-    public String addNewPassenger(Model model, Passenger passenger) {
-        model.addAttribute("passenger", passengerService.getAllPassengers());
-
-        return "/train/select";
+        return "train/select";
     }
 }

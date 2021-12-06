@@ -20,9 +20,9 @@
     </form>
 
     <th:block th:if="${find}">
-        <input hidden name="trains" th:value="${train}"/>
+        <input hidden name="trains" th:value="${trains}"/>
         <h3>Here's what was found</h3>
-        <div th:each="train: ${train}">
+        <div th:each="train: ${trains}">
             <form th:method="POST" action="choose">
             <p th:text="${train.toString()}"></p>
                 <div th:each="id: ${trainsId}">
@@ -37,7 +37,7 @@
     <th:block th:if="${choose}">
        <form th:method="POST" action="newPassenger">
            <h3>Registration of a check</h3>
-           <input hidden th:field="${train.id}" th:value="${train.getId()}">
+           <input hidden th:field="${train.id}" th:value="${trainId}">
            <p th:text="${train.toString()}"></p>
 
            <label for="name">Enter name: </label>
@@ -58,7 +58,7 @@
            <label for="document_series">Enter document series: </label>
            <input id="document_series" name="documentSeries" type="text"/><br>
 
-           <input type="submit" value="Register"/>
+           <input type="submit" value="Create"/>
 
            <h3>Here's what was found</h3>
            <div th:each="train: ${trains}">
@@ -71,9 +71,11 @@
 
     <th:block th:if="${newPassenger}">
         <form th:method="POST" action="choose">
-            <div th:each="passenger: ${passenger}">
-                <p th:text="${passenger.toString()}"></p>
-            </div>
+            <h3>Registration was successful</h3>
+            <h4>Passenger: </h4>
+            <p th:name="passenger" th:text="${passenger}"></p>
+            <h4>Registered on train: </h4>
+            <p th:name="train" th:text="${train.toString()}"></p>
         </form>
     </th:block>
 </body>

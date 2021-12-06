@@ -1,13 +1,21 @@
 package com.kolmakova.dto;
 
+import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
-
-import java.util.List;
 
 public class ControllerDTO {
 
     private Train train;
     private int trainId;
+    private Passenger passenger;
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
 
     public Train getTrain() {
         return train;
