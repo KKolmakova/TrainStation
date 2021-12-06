@@ -24,19 +24,6 @@ public class Passenger {
     @Column(name = "document_series")
     private String documentSeries;
 
-    public Passenger() {
-    }
-
-    public Passenger(int id, String name, String surname, String sex, String birthDate, String documentType, String documentSeries) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.sex = sex;
-        this.birthDate = birthDate;
-        this.documentType = documentType;
-        this.documentSeries = documentSeries;
-    }
-
     public void setId(int id) {
         this.id = id;
     }

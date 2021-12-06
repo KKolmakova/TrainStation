@@ -2,12 +2,15 @@ package com.kolmakova.services;
 
 import com.kolmakova.entities.Train;
 import com.kolmakova.repositories.TrainRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service
 public class TrainService {
 
@@ -23,7 +26,7 @@ public class TrainService {
     }
 
     public Train getTrainById(int id) {
-        return trainRepository.getTrainById(id);
+        return trainRepository.findById(id).orElse(new Train());
     }
 
     public List<Integer> getTrainsId(List<Train> trains) {
@@ -35,7 +38,12 @@ public class TrainService {
         return trainsId;
     }
 
-    public List<Train> getTrainsByIdes(Integer[] id){
-        return trainRepository.getTrainsByIdes(id);
+    public String getSelectedTrainsUrl(List<Train> trains) {
+        List<Integer> ids = getTrainsId(trains);
+        return StringUtils.join(ids, ',');
+    }
+
+    public List<Train> getTrainsByIds(List<Integer> id) {
+        return trainRepository.findAllById(id);
     }
 }

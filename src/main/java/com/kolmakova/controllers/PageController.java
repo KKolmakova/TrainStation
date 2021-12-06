@@ -13,14 +13,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/train")
-public class TrainController {
+public class PageController {
 
     @Autowired
     private TrainService trainService;
     @Autowired
     private PassengerService passengerService;
 
-    @GetMapping("/select")
+    @GetMapping("/main")
     public String selectTrains() {
         return "train/select";
     }
@@ -30,16 +30,18 @@ public class TrainController {
         List<Train> trains = trainService.getByArrivalPlace(train.getArrivalPlace());
         model.addAttribute("find", true);
         model.addAttribute("trains", trains);
-        model.addAttribute("trainsId", trainService.getTrainsId(trains));
+        model.addAttribute("trainIds", trainService.getSelectedTrainsUrl(trains));
 
         return "train/select";
     }
 
-    @PostMapping("/choose")
-    public String chooseTrain(Model model, Train train, @RequestParam(value = "trainsId") Integer[] trainsId) {
+    @PostMapping("/match/{trainIds}/selected/{selectedTrainId}")
+    public String chooseTrain(Model model,
+                              @PathVariable("trainIds") List<Integer> trainIds,
+                              @PathVariable("selectedTrainId") Integer selectedTrainId) {
         model.addAttribute("choose", true);
-        model.addAttribute("trains", trainService.getTrainsByIdes(trainsId));
-        model.addAttribute("train", trainService.getTrainById(train.getId()));
+        model.addAttribute("trains", trainService.getTrainsByIds(trainIds));
+        model.addAttribute("train", trainService.getTrainById(selectedTrainId));
 
         return "train/select";
     }

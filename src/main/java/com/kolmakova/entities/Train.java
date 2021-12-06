@@ -13,7 +13,7 @@ public class Train {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private int number;
     @Column(name = "departure_time")
     private String departureTime;
@@ -21,17 +21,6 @@ public class Train {
     private String arrivalPlace;
     @Column(name = "departure_date")
     private String departureDate;
-
-    public Train() {
-    }
-
-    public Train(int id, int number, String departureTime, String arrivalPlace, String departureDate) {
-        this.id = id;
-        this.number = number;
-        this.departureTime = departureTime;
-        this.arrivalPlace = arrivalPlace;
-        this.departureDate = departureDate;
-    }
 
     public void setId(int id) {
         this.id = id;

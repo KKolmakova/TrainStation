@@ -23,10 +23,10 @@
         <input hidden name="trains" th:value="${trains}"/>
         <h3>Here's what was found</h3>
         <div th:each="train: ${trains}">
-            <form th:method="POST" action="choose">
+            <form th:method="POST" th:action="@{match/__${trainIds}__/selected/__${train.getId()}__}">
             <p th:text="${train.toString()}"></p>
-                <div th:each="id: ${trainsId}">
-                    <input hidden name="trainsId" th:value="${id}"/>
+                <div th:each="id: ${trainIds}">
+                    <input hidden name="trainIds" th:value="${id}"/>
                 </div>
             <input hidden name="id" th:value="${train.getId()}">
             <input value="Choose" type="submit"/>
