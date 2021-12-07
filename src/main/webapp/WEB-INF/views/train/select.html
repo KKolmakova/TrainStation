@@ -5,78 +5,75 @@
     <title>Train Station</title>
 </head>
 <body>
-    <form th:method="POST" action="find">
-        <h3>Let's find the right train</h3>
-        <label for="arrival_place">Enter arrival place: </label>
-        <input id="arrival_place" name="arrivalPlace" type="text"/><br>
+<form th:method="GET" action="search/find">
+    <h3>Let's find the right train</h3>
+    <label for="arrival_place">Enter arrival place: </label>
+    <input id="arrival_place" name="arrivalPlace" type="text"/><br>
 
-        <label for="departure_time">Enter departure time: </label>
-        <input id="departure_time" name="departureTime" type="text"/><br>
+    <label for="departure_time">Enter departure time: </label>
+    <input id="departure_time" name="departureTime" type="text"/><br>
 
-        <label for="departure_date">Enter departure date: </label>
-        <input id="departure_date" name="departureDate" type="text"/><br>
+    <label for="departure_date">Enter departure date: </label>
+    <input id="departure_date" name="departureDate" type="text"/><br>
 
-        <input value="Find" type="submit"/>
-    </form>
+    <input value="Find" type="submit"/>
+</form>
 
-    <th:block th:if="${find}">
-        <input hidden name="trains" th:value="${trains}"/>
+<th:block th:if="${findTrainsForm}">
+    <h3>Here's what was found</h3>
+    <input hidden name="trains" th:value="${trains}"/>
+    <div th:each="train: ${trains}">
+        <form th:method="GET" th:action="@{/find/trains/__${trainsIds}__/train/__${train.getId()}__/print}">
+            <p th:text="${train.toString()}"></p>
+            <input value="Choose" type="submit"/>
+        </form>
+    </div>
+</th:block>
+
+<th:block th:if="${registrationPassengerForm}">
+    <p text="Ok!">Ok</p>
+<!--    <input hidden name="train" th:value="${train}">-->
+    <form th:method="GET" action="@{find/trains/__${trainsIds}__/train/__${trainId}__/newPassenger}">
+        <h3>Registration of a check</h3>
+        <p th:text="${train.toString()}"></p>
+
+        <label for="name">Enter name: </label>
+        <input id="name" name="name" type="text"/><br>
+
+        <label for="surname">Enter surname: </label>
+        <input id="surname" name="surname" type="text"/><br>
+
+        <label for="sex">Enter sex: </label>
+        <input id="sex" name="sex" type="text"/><br>
+
+        <label for="birth_date">Enter birth date: </label>
+        <input id="birth_date" name="birthDate" type="text"/><br>
+
+        <label for="document_type">Enter document type: </label>
+        <input id="document_type" name="documentType" type="text"/><br>
+
+        <label for="document_series">Enter document series: </label>
+        <input id="document_series" name="documentSeries" type="text"/><br>
+
+        <input type="submit" value="Create"/>
+
         <h3>Here's what was found</h3>
         <div th:each="train: ${trains}">
-            <form th:method="POST" th:action="@{match/__${trainIds}__/selected/__${train.getId()}__}">
-            <p th:text="${train.toString()}"></p>
-                <div th:each="id: ${trainIds}">
-                    <input hidden name="trainIds" th:value="${id}"/>
-                </div>
-            <input hidden name="id" th:value="${train.getId()}">
-            <input value="Choose" type="submit"/>
+            <form th:method="GET" action="choose">
+                <p th:text="${train.toString()}"></p>
             </form>
         </div>
-    </th:block>
+    </form>
+</th:block>
 
-    <th:block th:if="${choose}">
-       <form th:method="POST" action="newPassenger">
-           <h3>Registration of a check</h3>
-           <input hidden th:field="${train.id}" th:value="${trainId}">
-           <p th:text="${train.toString()}"></p>
-
-           <label for="name">Enter name: </label>
-           <input id="name" name="name" type="text"/><br>
-
-           <label for="surname">Enter surname: </label>
-           <input id="surname" name="surname" type="text"/><br>
-
-           <label for="sex">Enter sex: </label>
-           <input id="sex" name="sex" type="text"/><br>
-
-           <label for="birth_date">Enter birth date: </label>
-           <input id="birth_date" name="birthDate" type="text"/><br>
-
-           <label for="document_type">Enter document type: </label>
-           <input id="document_type" name="documentType" type="text"/><br>
-
-           <label for="document_series">Enter document series: </label>
-           <input id="document_series" name="documentSeries" type="text"/><br>
-
-           <input type="submit" value="Create"/>
-
-           <h3>Here's what was found</h3>
-           <div th:each="train: ${trains}">
-               <form th:method="POST" action="choose">
-                   <p th:text="${train.toString()}"></p>
-               </form>
-           </div>
-        </form>
-    </th:block>
-
-    <th:block th:if="${newPassenger}">
-        <form th:method="POST" action="choose">
-            <h3>Registration was successful</h3>
-            <h4>Passenger: </h4>
-            <p th:name="passenger" th:text="${passenger}"></p>
-            <h4>Registered on train: </h4>
-            <p th:name="train" th:text="${train.toString()}"></p>
-        </form>
-    </th:block>
+<th:block th:if="${checkForm}">
+    <form th:method="GET" action="@{/trains/__${trainIds}__/train/__${id}__/print/newPassenger/check}">
+        <h3>Registration was successful</h3>
+        <h4>Passenger: </h4>
+        <p th:name="passenger" th:text="${passenger}"></p>
+        <h4>Registered on train: </h4>
+        <p th:name="train" th:text="${train.toString()}"></p>
+    </form>
+</th:block>
 </body>
 </html>

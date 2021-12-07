@@ -1,4 +1,4 @@
-package com.kolmakova.dto;
+package com.kolmakova.requestObjects;
 
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
