@@ -5,6 +5,9 @@
     <title>Train Station</title>
 </head>
 <body>
+<!--<div>-->
+<!--    <p th:text="${T(com.kolmakova.controllers.Constants).TEST_CONSTANT}"></p>-->
+<!--</div>-->
 <form th:method="GET" action="search/find">
     <h3>Let's find the right train</h3>
     <label for="arrival_place">Enter arrival place: </label>
@@ -31,11 +34,10 @@
 </th:block>
 
 <th:block th:if="${registrationPassengerForm}">
-    <p text="Ok!">Ok</p>
-<!--    <input hidden name="train" th:value="${train}">-->
-    <form th:method="GET" action="@{find/trains/__${trainsIds}__/train/__${trainId}__/newPassenger}">
+    <form th:method="POST" action="/create">
+        <input hidden name="trainId" th:value="${trainForm.getSelectTrainDTO().getId()}"/>
         <h3>Registration of a check</h3>
-        <p th:text="${train.toString()}"></p>
+        <p th:text="${trainForm.getSelectTrainDTO().toString()}"></p>
 
         <label for="name">Enter name: </label>
         <input id="name" name="name" type="text"/><br>
@@ -58,7 +60,7 @@
         <input type="submit" value="Create"/>
 
         <h3>Here's what was found</h3>
-        <div th:each="train: ${trains}">
+        <div th:each="train: ${trainForm.getTrainDTOList()}">
             <form th:method="GET" action="choose">
                 <p th:text="${train.toString()}"></p>
             </form>

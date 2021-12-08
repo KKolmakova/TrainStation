@@ -1,7 +1,7 @@
 package com.kolmakova.controllers;
 
+import com.kolmakova.dto.TrainSearchRequest;
 import com.kolmakova.entities.Train;
-import com.kolmakova.requestObjects.RequestObject;
 import com.kolmakova.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class SearchController {
     }
 
     @GetMapping("/find")
-    public String findSelected(Model model, RequestObject requestObject) {
-        List<Train> trains = trainService.getByArrivalPlace(requestObject.getArrivalPlace());
+    public String findSelected(Model model, TrainSearchRequest trainSearchRequest) {
+        List<Train> trains = trainService.getByArrivalPlace(trainSearchRequest.getArrivalPlace());
 
         model.addAttribute("findTrainsForm", true);
         model.addAttribute("trains", trains);

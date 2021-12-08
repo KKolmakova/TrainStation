@@ -1,5 +1,7 @@
 package com.kolmakova.controllers;
 
+import com.kolmakova.layeres.TrainForm;
+import com.kolmakova.layeres.TrainResponseLayer;
 import com.kolmakova.services.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,14 +16,15 @@ public class TrainController {
 
     @Autowired
     private TrainService trainService;
+    @Autowired
+    private TrainResponseLayer trainResponseLayer;
 
     @GetMapping("/print")
     public String registerPassenger(Model model,
-                                    @PathVariable("trainsIds") List<Integer> ids,
+                                    @PathVariable("trainsIds") List<Integer> trainsIds,
                                     @PathVariable("trainId") Integer trainId) {
         model.addAttribute("registrationPassengerForm", true);
-        model.addAttribute("trains", trainService.getTrainsByIds(ids));
-        model.addAttribute("train", trainService.getTrainById(trainId));
+        model.addAttribute("trainForm", trainResponseLayer.createRegisterPassenger(trainId,trainsIds));
 
         return "train/select";
     }

@@ -1,28 +1,14 @@
-package com.kolmakova.entities;
+package com.kolmakova.dto;
 
-import org.hibernate.annotations.Table;
+public class TrainDTO {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Table(appliesTo = "Train")
-@Entity
-public class Train {
-
-    @Id
-    @GeneratedValue
     private Integer id;
     private int number;
-    @Column(name = "departure_time")
     private String departureTime;
-    @Column(name = "arrival_place")
     private String arrivalPlace;
-    @Column(name = "departure_date")
     private String departureDate;
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,7 +28,7 @@ public class Train {
         this.departureDate = departureDate;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -64,7 +50,7 @@ public class Train {
 
     @Override
     public String toString() {
-        return "Train{" +
+        return "TrainDTO{" +
                 "id=" + id +
                 ", number=" + number +
                 ", departureTime='" + departureTime + '\'' +
@@ -73,3 +59,5 @@ public class Train {
                 '}';
     }
 }
+
+

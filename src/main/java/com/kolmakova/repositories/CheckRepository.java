@@ -1,9 +1,9 @@
 package com.kolmakova.repositories;
 
-import com.kolmakova.entities.Passenger;
+import com.kolmakova.entities.Check;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PassengerRepository extends JpaRepository<Passenger, Integer> {
+public interface CheckRepository extends JpaRepository<Check, Integer> {
 }

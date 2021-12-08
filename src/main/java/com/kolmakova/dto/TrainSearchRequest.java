@@ -1,8 +1,6 @@
-package com.kolmakova.requestObjects;
+package com.kolmakova.dto;
 
-import com.kolmakova.entities.Train;
-
-public class RequestObject {
+public class TrainSearchRequest {
 
     private String arrivalPlace;
     private String departureTime;

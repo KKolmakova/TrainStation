@@ -1,30 +1,16 @@
-package com.kolmakova.entities;
+package com.kolmakova.dto;
 
-import org.hibernate.annotations.ManyToAny;
-import org.hibernate.annotations.Table;
+public class PassengerDTO {
 
-import javax.persistence.*;
-
-@Table(appliesTo = "Passenger")
-@Entity
-public class Passenger {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private String name;
     private String surname;
     private String sex;
-    @Column(name = "birth_date")
     private String birthDate;
-    @Column(name = "document_type")
     private String documentType;
-    @Column(name = "document_series")
     private String documentSeries;
-    @OneToOne (mappedBy="passenger")
-    private Check check;
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -52,7 +38,7 @@ public class Passenger {
         this.documentSeries = documentSeries;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -78,18 +64,5 @@ public class Passenger {
 
     public String getDocumentSeries() {
         return documentSeries;
-    }
-
-    @Override
-    public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", documentType='" + documentType + '\'' +
-                ", documentSeries='" + documentSeries + '\'' +
-                '}';
     }
 }
