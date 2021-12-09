@@ -30,8 +30,6 @@ public class SearchController {
 
     @GetMapping("/find")
     public String findSelected(Model model, TrainSearchRequest trainSearchRequest) {
-        List<Train> trains = trainService.getByArrivalPlace(trainSearchRequest.getArrivalPlace());
-
         model.addAttribute("findTrainsForm", true);
         model.addAttribute("searchForm", searchResponseLayer.getSearchForm(trainSearchRequest));
 

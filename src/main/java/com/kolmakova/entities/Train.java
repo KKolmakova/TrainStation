@@ -1,24 +1,24 @@
 package com.kolmakova.entities;
 
-import org.hibernate.annotations.Table;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Table(appliesTo = "Train")
+@Table(name = "Train")
 @Entity
 public class Train {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "train_number")
     private int number;
+
     @Column(name = "departure_time")
     private String departureTime;
+
     @Column(name = "arrival_place")
     private String arrivalPlace;
+
     @Column(name = "departure_date")
     private String departureDate;
 

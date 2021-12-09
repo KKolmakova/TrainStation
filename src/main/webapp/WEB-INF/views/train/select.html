@@ -5,10 +5,8 @@
     <title>Train Station</title>
 </head>
 <body>
-<!--<div>-->
-<!--    <p th:text="${T(com.kolmakova.controllers.Constants).TEST_CONSTANT}"></p>-->
-<!--</div>-->
-<form th:method="GET" action="search/find">
+
+<form th:method="GET" action="/search/find">
     <h3>Let's find the right train</h3>
     <label for="arrival_place">Enter arrival place: </label>
     <input id="arrival_place" name="arrivalPlace" type="text"/><br>
@@ -25,7 +23,6 @@
 <th:block th:if="${findTrainsForm}">
     <h3>Here's what was found</h3>
     <input hidden name="searchForm" th:value="${searchForm}"/>
-<!--    <input hidden name="trains" th:value="${trains}"/>-->
     <div th:each="train: ${searchForm.getTrainDTOList()}">
         <form th:method="GET" th:action="@{/find/trains/__${searchForm.getTrainsIds()}__/train/__${train.getId()}__/print}">
             <p th:text="${train.toString()}"></p>

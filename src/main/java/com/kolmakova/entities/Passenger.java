@@ -1,28 +1,31 @@
 package com.kolmakova.entities;
 
-import org.hibernate.annotations.ManyToAny;
-import org.hibernate.annotations.Table;
-
 import javax.persistence.*;
+import java.util.List;
 
-@Table(appliesTo = "Passenger")
+@Table(name = "Passenger")
 @Entity
 public class Passenger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name = "pass_name")
     private String name;
+
     private String surname;
     private String sex;
+
     @Column(name = "birth_date")
     private String birthDate;
+
     @Column(name = "document_type")
     private String documentType;
+
     @Column(name = "document_series")
     private String documentSeries;
-    @OneToOne (mappedBy="passenger")
-    private Check check;
 
     public void setId(Integer id) {
         this.id = id;

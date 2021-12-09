@@ -49,5 +49,4 @@ public class CheckController {
 
         return "redirect:" + checkResponseLayer.createCheckForm(passengerDTO, trainId);
     }
-
 }

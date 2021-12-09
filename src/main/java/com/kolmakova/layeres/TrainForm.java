@@ -4,7 +4,6 @@ import java.util.List;
 
 public class TrainForm {
 
-    private String visibilityPart;
     private TrainDTO selectedTrainDTO;
     private List<TrainDTO> trainDTOList;
     private String trainsIds;
@@ -15,14 +14,6 @@ public class TrainForm {
 
     public void setTrainsIds(String trainsIds) {
         this.trainsIds = trainsIds;
-    }
-
-    public String getVisibilityPart() {
-        return visibilityPart;
-    }
-
-    public void setVisibilityPart(String visibilityPart) {
-        this.visibilityPart = visibilityPart;
     }
 
     public TrainDTO getSelectTrainDTO() {

@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring.version>5.1.0.RELEASE</spring.version>
+        <spring.version>5.3.13</spring.version>
     </properties>
 
     <dependencies>
@@ -76,8 +76,13 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.10.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.17.Final</version>
+            <version>5.5.7.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
