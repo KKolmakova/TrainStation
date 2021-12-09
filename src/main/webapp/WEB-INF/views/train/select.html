@@ -24,9 +24,10 @@
 
 <th:block th:if="${findTrainsForm}">
     <h3>Here's what was found</h3>
-    <input hidden name="trains" th:value="${trains}"/>
-    <div th:each="train: ${trains}">
-        <form th:method="GET" th:action="@{/find/trains/__${trainsIds}__/train/__${train.getId()}__/print}">
+    <input hidden name="searchForm" th:value="${searchForm}"/>
+<!--    <input hidden name="trains" th:value="${trains}"/>-->
+    <div th:each="train: ${searchForm.getTrainDTOList()}">
+        <form th:method="GET" th:action="@{/find/trains/__${searchForm.getTrainsIds()}__/train/__${train.getId()}__/print}">
             <p th:text="${train.toString()}"></p>
             <input value="Choose" type="submit"/>
         </form>
