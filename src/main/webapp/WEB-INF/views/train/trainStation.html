@@ -6,25 +6,28 @@
 </head>
 <body>
 
-<form th:method="GET" action="/search/find">
-    <h3>Let's find the right train</h3>
-    <label for="arrival_place">Enter arrival place: </label>
-    <input id="arrival_place" name="arrivalPlace" type="text"/><br>
+<th:block th:if="${searchForm}">
+    <form th:method="GET" action="/search/find">
+        <h3>Let's find the right train</h3>
+        <label for="arrival_place">Enter arrival place: </label>
+        <input id="arrival_place" name="arrivalPlace" type="text"/><br>
 
-    <label for="departure_time">Enter departure time: </label>
-    <input id="departure_time" name="departureTime" type="text"/><br>
+        <label for="departure_time">Enter departure time: </label>
+        <input id="departure_time" name="departureTime" type="text"/><br>
 
-    <label for="departure_date">Enter departure date: </label>
-    <input id="departure_date" name="departureDate" type="text"/><br>
+        <label for="departure_date">Enter departure date: </label>
+        <input id="departure_date" name="departureDate" type="text"/><br>
 
-    <input value="Find" type="submit"/>
-</form>
+        <input value="Find" type="submit"/>
+    </form>
+</th:block>
 
 <th:block th:if="${findTrainsForm}">
     <h3>Here's what was found</h3>
     <input hidden name="searchForm" th:value="${searchForm}"/>
     <div th:each="train: ${searchForm.getTrainDTOList()}">
-        <form th:method="GET" th:action="@{/find/trains/__${searchForm.getTrainsIds()}__/train/__${train.getId()}__/print}">
+        <form th:method="GET"
+              th:action="@{/find/trains/__${searchForm.getTrainsIds()}__/train/__${train.getId()}__/print}">
             <p th:text="${train.toString()}"></p>
             <input value="Choose" type="submit"/>
         </form>
@@ -67,12 +70,14 @@
 </th:block>
 
 <th:block th:if="${checkForm}">
-    <form th:method="GET" action="@{/trains/__${trainIds}__/train/__${id}__/print/newPassenger/check}">
+    <form th:method="GET" action="/search">
         <h3>Registration was successful</h3>
         <h4>Passenger: </h4>
-        <p th:name="passenger" th:text="${passenger}"></p>
+        <p th:text="${checkResponse.getPassenger().toString()}"></p>
         <h4>Registered on train: </h4>
-        <p th:name="train" th:text="${train.toString()}"></p>
+        <p th:text="${checkResponse.getTrain().toString()}"></p>
+
+        <input type="submit" value="Ok"/>
     </form>
 </th:block>
 </body>

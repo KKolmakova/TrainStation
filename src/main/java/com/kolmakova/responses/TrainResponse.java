@@ -1,8 +1,8 @@
-package com.kolmakova.layeres;
+package com.kolmakova.responses;
 import com.kolmakova.dto.TrainDTO;
 import java.util.List;
 
-public class TrainForm {
+public class TrainResponse {
 
     private TrainDTO selectedTrainDTO;
     private List<TrainDTO> trainDTOList;

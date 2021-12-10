@@ -1,16 +1,13 @@
 package com.kolmakova.controllers;
 
-import com.kolmakova.dto.CheckDTO;
 import com.kolmakova.dto.PassengerDTO;
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.layeres.CheckResponseLayer;
-import com.kolmakova.layeres.TrainResponseLayer;
-import com.kolmakova.services.PassengerService;
-import com.kolmakova.services.TrainService;
+import com.kolmakova.responseServices.CheckResponseService;
+import com.kolmakova.responses.CheckResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,35 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CheckController {
 
     @Autowired
-    private PassengerService passengerService;
-    @Autowired
-    private TrainService trainService;
-    @Autowired
-    private TrainResponseLayer trainResponseLayer;
-    @Autowired
-    private CheckResponseLayer checkResponseLayer;
+    private CheckResponseService checkResponseService;
 
     @GetMapping("{id}")
     public String getOne(Model model,
-                         @RequestParam("trainId") Integer trainId,
-                         @RequestParam("passengerId") Integer passengerId) {
+                         @PathVariable("id") Integer checkId) {
         model.addAttribute("checkForm", true);
-//        model.addAttribute("response",trainResponseLayer.createPassenger(trainId, passengerId));
-//        model.addAttribute("passenger", passengerService.getPassengerById(passengerId));
-//        model.addAttribute("train", trainService.getTrainById(passengerId));
+        model.addAttribute("checkResponse", checkResponseService.getCheckResponse(checkId));
 
-        return "train/select";
+        return "train/trainStation";
     }
 
     @PostMapping("/create")
-    // dto with check required params (userId, trainId)
     public String createCheck(Model model,
                               PassengerDTO passengerDTO,
                               @RequestParam("trainId") Integer trainId) {
-        // passengerService.savePassenger(checkDTO.getPassengerDTO());
-        // save to db check logic
-        // redirect to check get method to print check by id
+//        CheckResponse checkResponse = checkResponseService.createCheckForm(passengerDTO, trainId);
+//        model.addAttribute("checkResponse", checkResponse);
 
-        return "redirect:" + checkResponseLayer.createCheckForm(passengerDTO, trainId);
+        return "redirect:" + checkResponseService.createCheck(passengerDTO, trainId);
     }
 }
