@@ -1,12 +1,12 @@
 package com.kolmakova.responses;
 
-import com.kolmakova.entities.Check;
+import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Train;
 
-public class CheckResponse {
+public class PaymentResponse {
 
-    private Check check;
+    private Payment payment;
     private Passenger passenger;
     private Train train;
 
@@ -26,11 +26,11 @@ public class CheckResponse {
         this.train = train;
     }
 
-    public Check getCheck() {
-        return check;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setCheck(Check check) {
-        this.check = check;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

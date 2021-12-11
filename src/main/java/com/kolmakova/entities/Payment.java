@@ -2,9 +2,9 @@ package com.kolmakova.entities;
 
 import javax.persistence.*;
 
-@Table(name = "Check1")
+@Table(name = "Payment")
 @Entity
-public class Check {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +52,38 @@ public class Check {
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public static Builder builder(){
+        return new Payment().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() { }
+
+        public Builder setId(Integer id){
+            Payment.this.id = id;
+            return this;
+        }
+
+        public Builder setTrain(Train train){
+            Payment.this.train = train;
+            return this;
+        }
+
+        public Builder setPassenger(Passenger passenger){
+            Payment.this.passenger = passenger;
+            return this;
+        }
+
+        public Builder setAmount(Double amount){
+            Payment.this.amount = amount;
+            return this;
+        }
+
+        public Payment build(){
+            return Payment.this;
+        }
     }
 }

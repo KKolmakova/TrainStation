@@ -1,7 +1,6 @@
 package com.kolmakova.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Table(name = "Passenger")
 @Entity
@@ -12,7 +11,7 @@ public class Passenger {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "pass_name")
+    @Column(name = "passenger_name")
     private String name;
 
     private String surname;

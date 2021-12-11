@@ -21,8 +21,8 @@ public class TrainController {
     public String registerPassenger(Model model,
                                     @PathVariable("trainsIds") List<Integer> trainsIds,
                                     @PathVariable("trainId") Integer trainId) {
-        model.addAttribute("registrationPassengerForm", true);
-        model.addAttribute("trainForm", trainResponseService.createRegisterPassenger(trainId,trainsIds));
+        model.addAttribute("registration", true);
+        model.addAttribute("response", trainResponseService.getResponse(trainId,trainsIds));
 
         return "train/trainStation";
     }
