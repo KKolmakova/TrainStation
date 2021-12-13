@@ -23,15 +23,14 @@ public class SearchResponseServiceImpl implements SearchResponseService {
 
     @Override
     public TrainResponse getResponse(TrainDTO trainDTO) {
+        TrainResponse trainResponse = new TrainResponse();
+
         List<Train> trains = trainService.getByArrivalPlace(trainDTO.getArrivalPlace());
+        List<TrainDTO> trainDTOList = converter.convertToTrainDTOList(trains);
+
         String trainsIdsUrl = trainService.getSelectedTrainsUrl(trains);
 
-        return getTrainResponse(trains, trainsIdsUrl);
-    }
-
-    private TrainResponse getTrainResponse(List<Train> trains, String trainsIdsUrl) {
-        TrainResponse trainResponse = new TrainResponse();
-        trainResponse.setTrainDTOList(converter.convertToTrainDTOList(trains));
+        trainResponse.setTrainDTOList(trainDTOList);
         trainResponse.setTrainsIds(trainsIdsUrl);
 
         return trainResponse;

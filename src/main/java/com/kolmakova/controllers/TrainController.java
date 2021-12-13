@@ -22,7 +22,7 @@ public class TrainController {
                                     @PathVariable("trainsIds") List<Integer> trainsIds,
                                     @PathVariable("trainId") Integer trainId) {
         model.addAttribute("registration", true);
-        model.addAttribute("response", trainResponseService.getResponse(trainId,trainsIds));
+        model.addAttribute("response", trainResponseService.getResponse(trainId, trainsIds));
 
         return "trainStation";
     }

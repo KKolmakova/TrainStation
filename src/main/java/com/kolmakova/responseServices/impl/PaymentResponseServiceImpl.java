@@ -2,6 +2,7 @@ package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.dto.PaymentDTO;
+import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Train;
@@ -31,6 +32,8 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
 
     @Override
     public PaymentResponse create(PassengerDTO passengerDTO, int trainId) {
+        PaymentResponse paymentResponse = new PaymentResponse();
+
         Passenger passenger = savePassenger(passengerDTO);
         Train train = getTrain(trainId);
         Double amount = 100.0;
@@ -41,9 +44,9 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
                 .setAmount(amount)
                 .build();
 
-        PaymentResponse paymentResponse = new PaymentResponse();
+        paymentService.savePayment(payment);
+        PaymentDTO savedPaymentDTO = converter.convertToPaymentDTO(payment);
 
-        PaymentDTO savedPaymentDTO = converter.convertToPaymentDTO(paymentService.savePayment(payment));
         paymentResponse.setPaymentDTO(savedPaymentDTO);
 
         return paymentResponse;
@@ -51,13 +54,17 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
 
     @Override
     public PaymentResponse getResponse(int paymentId) {
-        Payment payment = paymentService.getPaymentById(paymentId);
-
         PaymentResponse paymentResponse = new PaymentResponse();
 
-        paymentResponse.setPassengerDTO(converter.convertToPassengerDTO(payment.getPassenger()));
-        paymentResponse.setTrainDTO(converter.convertToTrainDTO(payment.getTrain()));
-        paymentResponse.setPaymentDTO(converter.convertToPaymentDTO(payment));
+        Payment payment = paymentService.getPaymentById(paymentId);
+
+        PaymentDTO paymentDTO = converter.convertToPaymentDTO(payment);
+        PassengerDTO passengerDTO = converter.convertToPassengerDTO(payment.getPassenger());
+        TrainDTO trainDTO = converter.convertToTrainDTO(payment.getTrain());
+
+        paymentResponse.setPassengerDTO(passengerDTO);
+        paymentResponse.setTrainDTO(trainDTO);
+        paymentResponse.setPaymentDTO(paymentDTO);
 
         return paymentResponse;
     }

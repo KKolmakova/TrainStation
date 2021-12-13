@@ -6,6 +6,15 @@
 </head>
 <body>
 
+<header>
+    <form th:method="GET" action="define/sign_in">
+        <input value="Sign in" type="submit"/>
+    </form>
+    <form th:method="GET" action="define/sign_up">
+        <input value="Sign up" type="submit"/>
+    </form>
+</header>
+
 <th:block th:if="${search}">
     <form th:method="GET" action="/search/found">
         <h3>Let's find the right train</h3>
@@ -79,6 +88,54 @@
         <p th:text="${response.getPaymentDTO().getAmount()}"></p>
 
         <input type="submit" value="Ok"/>
+    </form>
+</th:block>
+
+<th:block th:if="${sign_in}">
+    <form th:method="POST" action="/create">
+        <h3>Enter personal data:</h3>
+
+        <label for="name">Enter name: </label>
+        <input id="name" name="name" type="text"/><br>
+
+        <label for="surname">Enter surname: </label>
+        <input id="surname" name="surname" type="text"/><br>
+
+        <label for="sex">Enter sex: </label>
+        <input id="sex" name="sex" type="text"/><br>
+
+        <label for="birth_date">Enter birth date: </label>
+        <input id="birth_date" name="birthDate" type="text"/><br>
+
+        <label for="document_type">Enter document type: </label>
+        <input id="document_type" name="documentType" type="text"/><br>
+
+        <label for="document_series">Enter document series: </label>
+        <input id="document_series" name="documentSeries" type="text"/><br>
+
+        <h3>Create login and password:</h3>
+
+        <label for="name">Login: </label>
+        <input id="name" name="name" type="text"/><br>
+
+        <label for="surname">Password: </label>
+        <input id="surname" name="surname" type="text"/><br>
+
+        <input type="submit" value="Create"/>
+    </form>
+</th:block>
+
+<th:block th:if="${sign_up}">
+    <form th:method="GET" action="/search">
+        <h3>Enter login and password:</h3>
+
+        <label for="name">Login: </label>
+        <input id="name" name="name" type="text"/><br>
+
+        <label for="surname">Password: </label>
+        <input id="surname" name="surname" type="text"/><br>
+
+        <input type="submit" value="Create"/>
     </form>
 </th:block>
 </body>
