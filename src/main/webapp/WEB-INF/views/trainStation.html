@@ -72,9 +72,11 @@
     <form th:method="GET" action="/search">
         <h3>Registration was successful</h3>
         <h4>Passenger: </h4>
-        <p th:text="${response.getPassenger().toString()}"></p>
+        <p th:text="${response.getPassengerDTO().toString()}"></p>
         <h4>Registered on train: </h4>
-        <p th:text="${response.getTrain().toString()}"></p>
+        <p th:text="${response.getTrainDTO().toString()}"></p>
+        <h4>Amount: </h4>
+        <p th:text="${response.getPaymentDTO().getAmount()}"></p>
 
         <input type="submit" value="Ok"/>
     </form>

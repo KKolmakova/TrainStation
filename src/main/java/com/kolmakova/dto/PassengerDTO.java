@@ -9,6 +9,7 @@ public class PassengerDTO {
     private String birthDate;
     private String documentType;
     private String documentSeries;
+    private Boolean isDeleted;
 
     public void setId(int id) {
         this.id = id;
@@ -64,5 +65,27 @@ public class PassengerDTO {
 
     public String getDocumentSeries() {
         return documentSeries;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "PassengerDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", documentType='" + documentType + '\'' +
+                ", documentSeries='" + documentSeries + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
     }
 }

@@ -1,36 +1,36 @@
 package com.kolmakova.responses;
 
-import com.kolmakova.entities.Payment;
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Train;
+import com.kolmakova.dto.PassengerDTO;
+import com.kolmakova.dto.PaymentDTO;
+import com.kolmakova.dto.TrainDTO;
 
 public class PaymentResponse {
 
-    private Payment payment;
-    private Passenger passenger;
-    private Train train;
+    private PaymentDTO paymentDTO;
+    private PassengerDTO passengerDTO;
+    private TrainDTO trainDTO;
 
-    public Passenger getPassenger() {
-        return passenger;
+    public PaymentDTO getPaymentDTO() {
+        return paymentDTO;
     }
 
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
+    public void setPaymentDTO(PaymentDTO paymentDTO) {
+        this.paymentDTO = paymentDTO;
     }
 
-    public Train getTrain() {
-        return train;
+    public PassengerDTO getPassengerDTO() {
+        return passengerDTO;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setPassengerDTO(PassengerDTO passengerDTO) {
+        this.passengerDTO = passengerDTO;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public TrainDTO getTrainDTO() {
+        return trainDTO;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setTrainDTO(TrainDTO trainDTO) {
+        this.trainDTO = trainDTO;
     }
 }

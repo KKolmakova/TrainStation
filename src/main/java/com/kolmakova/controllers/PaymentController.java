@@ -22,12 +22,12 @@ public class PaymentController {
         model.addAttribute("payment", true);
         model.addAttribute("response", paymentResponseService.getResponse(paymentId));
 
-        return "train/trainStation";
+        return "trainStation";
     }
 
     @PostMapping("/create")
     public String createPayment(PassengerDTO passengerDTO,
                                 @RequestParam("trainId") Integer trainId) {
-        return "redirect:" + paymentResponseService.create(passengerDTO, trainId).getPayment().getId();
+        return "redirect:" + paymentResponseService.create(passengerDTO, trainId).getPaymentDTO().getId();
     }
 }

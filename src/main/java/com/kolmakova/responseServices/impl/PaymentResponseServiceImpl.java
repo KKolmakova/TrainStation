@@ -1,6 +1,7 @@
 package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PassengerDTO;
+import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Train;
@@ -9,7 +10,7 @@ import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.services.PaymentService;
 import com.kolmakova.services.TrainService;
-import org.springframework.beans.BeanUtils;
+import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     private PassengerService passengerService;
     @Autowired
     private TrainService trainService;
+    @Autowired
+    private Converter converter;
 
     @Override
     public PaymentResponse create(PassengerDTO passengerDTO, int trainId) {
@@ -39,29 +42,31 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
                 .build();
 
         PaymentResponse paymentResponse = new PaymentResponse();
-        paymentResponse.setPayment(paymentService.savePayment(payment));
+
+        PaymentDTO savedPaymentDTO = converter.convertToPaymentDTO(paymentService.savePayment(payment));
+        paymentResponse.setPaymentDTO(savedPaymentDTO);
 
         return paymentResponse;
     }
 
     @Override
     public PaymentResponse getResponse(int paymentId) {
+        Payment payment = paymentService.getPaymentById(paymentId);
+
         PaymentResponse paymentResponse = new PaymentResponse();
-        paymentResponse.setPassenger(paymentService.getPaymentById(paymentId).getPassenger());
-        paymentResponse.setTrain(paymentService.getPaymentById(paymentId).getTrain());
+
+        paymentResponse.setPassengerDTO(converter.convertToPassengerDTO(payment.getPassenger()));
+        paymentResponse.setTrainDTO(converter.convertToTrainDTO(payment.getTrain()));
+        paymentResponse.setPaymentDTO(converter.convertToPaymentDTO(payment));
 
         return paymentResponse;
     }
 
     private Passenger savePassenger(PassengerDTO passengerDTO) {
-        Passenger passenger = new Passenger();
-        BeanUtils.copyProperties(passengerDTO, passenger);
-
-        return passengerService.savePassenger(passenger);
+        return passengerService.savePassenger(converter.convertToPassenger(passengerDTO));
     }
 
     private Train getTrain(int trainId) {
         return trainService.getTrainById(trainId);
     }
-
 }

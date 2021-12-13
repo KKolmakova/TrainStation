@@ -18,7 +18,7 @@ public class SearchController {
     @GetMapping()
     public String selectTrains(Model model) {
         model.addAttribute("search", true);
-        return "train/trainStation";
+        return "trainStation";
     }
 
     @GetMapping("/found")
@@ -27,6 +27,6 @@ public class SearchController {
         model.addAttribute("search", true);
         model.addAttribute("response", searchResponseService.getResponse(trainDTO));
 
-        return "train/trainStation";
+        return "trainStation";
     }
 }

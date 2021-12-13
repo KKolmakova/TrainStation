@@ -24,6 +24,6 @@ public class TrainController {
         model.addAttribute("registration", true);
         model.addAttribute("response", trainResponseService.getResponse(trainId,trainsIds));
 
-        return "train/trainStation";
+        return "trainStation";
     }
 }
