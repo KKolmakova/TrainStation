@@ -4,9 +4,12 @@ import com.kolmakova.entities.Train;
 import com.kolmakova.repositories.TrainRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +47,33 @@ public class TrainService {
 
     public List<Train> getTrainsByIds(List<Integer> id) {
         return trainRepository.findAllById(id);
+    }
+
+    public List<Train> getByParameters(String arrivalPlace, Date departureDate, LocalTime departureTime) {
+        Specification<Train> specification = Specification.where(null);
+
+        if (StringUtils.isNotEmpty(arrivalPlace)) {
+            specification = specification.and(matchesArrivalPlace(arrivalPlace));
+        }
+        if (departureDate != null) {
+            specification = specification.and(matchesDepartureDate(departureDate));
+        }
+        if (departureTime != null) {
+            specification = specification.and(matchesDepartureTime(departureTime));
+        }
+
+        return trainRepository.findAll(specification);
+    }
+
+    public static Specification<Train> matchesArrivalPlace(String arrivalPlace) {
+        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("arrivalPlace"), arrivalPlace);
+    }
+
+    public static Specification<Train> matchesDepartureDate(Date departureDate) {
+        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("departureDate"), departureDate);
+    }
+
+    public static Specification<Train> matchesDepartureTime(LocalTime departureTime) {
+        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("departureTime"), departureTime);
     }
 }

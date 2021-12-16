@@ -27,14 +27,24 @@ public class Converter {
 
     public PassengerDTO convertToPassengerDTO(Passenger passenger) {
         PassengerDTO passengerDTO = new PassengerDTO();
+        List<PaymentDTO> paymentDTOList = convertToPaymentDTOList(passenger.getPaymentList());
+
         BeanUtils.copyProperties(passenger, passengerDTO);
+        passengerDTO.setPaymentDTOList(paymentDTOList);
 
         return passengerDTO;
     }
 
     public PaymentDTO convertToPaymentDTO(Payment payment) {
         PaymentDTO paymentDTO = new PaymentDTO();
+
+        TrainDTO trainDTO = convertToTrainDTO(payment.getTrain());
+        PricingDTO pricingDTO = convertToPricingDTO(payment.getPricing());
+
         BeanUtils.copyProperties(payment, paymentDTO);
+
+        paymentDTO.setTrainDTO(trainDTO);
+        paymentDTO.setPricingDTO(pricingDTO);
 
         return paymentDTO;
     }

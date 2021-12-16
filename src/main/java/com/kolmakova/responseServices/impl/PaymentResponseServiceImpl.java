@@ -2,6 +2,7 @@ package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.dto.PaymentDTO;
+import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
@@ -49,6 +50,7 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
         Payment payment = Payment.builder()
                 .setPassenger(passenger)
                 .setTrain(train)
+                .setPricing(pricing)
                 .setAmount(amount)
                 .build();
 
@@ -69,10 +71,12 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(payment);
         PassengerDTO passengerDTO = converter.convertToPassengerDTO(payment.getPassenger());
         TrainDTO trainDTO = converter.convertToTrainDTO(payment.getTrain());
+        PricingDTO pricingDTO = converter.convertToPricingDTO(payment.getPricing());
 
         paymentResponse.setPassengerDTO(passengerDTO);
         paymentResponse.setTrainDTO(trainDTO);
         paymentResponse.setPaymentDTO(paymentDTO);
+        paymentResponse.setPricingDTO(pricingDTO);
 
         return paymentResponse;
     }

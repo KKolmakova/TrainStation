@@ -5,6 +5,7 @@ public class PaymentDTO {
     private Integer id;
     private TrainDTO trainDTO;
     private PassengerDTO passengerDTO;
+    private PricingDTO pricingDTO;
     private double amount;
 
     public Integer getId() {
@@ -31,6 +32,14 @@ public class PaymentDTO {
         this.passengerDTO = passengerDTO;
     }
 
+    public PricingDTO getPricingDTO() {
+        return pricingDTO;
+    }
+
+    public void setPricingDTO(PricingDTO pricingDTO) {
+        this.pricingDTO = pricingDTO;
+    }
+
     public double getAmount() {
         return amount;
     }
@@ -45,6 +54,7 @@ public class PaymentDTO {
                 "id=" + id +
                 ", trainDTO=" + trainDTO +
                 ", passengerDTO=" + passengerDTO +
+                ", pricingDTO=" + pricingDTO +
                 ", amount=" + amount +
                 '}';
     }

@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/find/trains/{trainsIds}/train/{trainId}/pricing/{pricingId}")
+@RequestMapping("/registration/pricing/{pricingId}")
 public class RegistrationController {
 
     @Autowired
@@ -19,11 +17,9 @@ public class RegistrationController {
 
     @GetMapping("/print")
     public String registerPassenger(Model model,
-                                    @PathVariable("trainsIds") List<Integer> trainsIds,
-                                    @PathVariable("trainId") Integer trainId,
                                     @PathVariable("pricingId") Integer pricingId) {
         model.addAttribute("registration", true);
-        model.addAttribute("response", registrationResponseService.getResponse(trainId, pricingId, trainsIds));
+        model.addAttribute("response", registrationResponseService.getResponse(pricingId));
 
         return "trainStation";
     }

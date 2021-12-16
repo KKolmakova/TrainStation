@@ -19,6 +19,10 @@ public class Payment {
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pricing_id")
+    private Pricing pricing;
+
     @Column(name = "amount")
     private double amount;
 
@@ -54,6 +58,14 @@ public class Payment {
         this.passenger = passenger;
     }
 
+    public Pricing getPricing() {
+        return pricing;
+    }
+
+    public void setPricing(Pricing pricing) {
+        this.pricing = pricing;
+    }
+
     public static Builder builder(){
         return new Payment().new Builder();
     }
@@ -74,6 +86,11 @@ public class Payment {
 
         public Builder setPassenger(Passenger passenger){
             Payment.this.passenger = passenger;
+            return this;
+        }
+
+        public Builder setPricing(Pricing pricing){
+            Payment.this.pricing = pricing;
             return this;
         }
 

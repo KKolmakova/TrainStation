@@ -14,4 +14,8 @@ public class PassengerService {
     public Passenger savePassenger(Passenger passenger) {
         return passengerRepository.save(passenger);
     }
+
+    public Passenger getPassengerById(int passengerId){
+        return passengerRepository.getOne(passengerId);
+    }
 }

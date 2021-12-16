@@ -1,7 +1,10 @@
 package com.kolmakova.entities;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Table(name = "Passenger")
 @Entity
@@ -26,6 +29,11 @@ public class Passenger {
 
     @Column(name = "document_series")
     private String documentSeries;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Where(clause = "mark_as_deleted = false")
+    @JoinColumn(name = "passenger_id")
+    private List<Payment> paymentList;
 
     public void setId(Integer id) {
         this.id = id;
@@ -83,16 +91,11 @@ public class Passenger {
         return documentSeries;
     }
 
-    @Override
-    public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", documentType='" + documentType + '\'' +
-                ", documentSeries='" + documentSeries + '\'' +
-                '}';
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
     }
 }

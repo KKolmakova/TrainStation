@@ -28,7 +28,8 @@ public class SearchResponseServiceImpl implements SearchResponseService {
     public RegistrationOnTrainResponse getResponse(TrainDTO trainDTO) {
         RegistrationOnTrainResponse registrationOnTrainResponse = new RegistrationOnTrainResponse();
 
-        List<Train> trains = trainService.getByArrivalPlace(trainDTO.getArrivalPlace());
+//        List<Train> trains = trainService.getByArrivalPlace(trainDTO.getArrivalPlace());
+        List<Train> trains = trainService.getByParameters(trainDTO.getArrivalPlace(), trainDTO.getDepartureDate(), trainDTO.getDepartureTime());
         List<TrainDTO> trainDTOList = getTrainsWithFreePlaces(converter.convertToTrainDTOList(trains));
 
         String trainsIdsUrl = trainService.getSelectedTrainsUrl(trains);
@@ -40,15 +41,24 @@ public class SearchResponseServiceImpl implements SearchResponseService {
     }
 
     private List<TrainDTO> getTrainsWithFreePlaces(List<TrainDTO> trainDTOList) {
+        List<TrainDTO> trainsWithFreeSeats = new ArrayList<>();
+
         for (TrainDTO train : trainDTOList) {
             List<PricingDTO> pricingList = train.getPricingDTOList();
-            pricingList.removeIf(pricing -> pricing.getSeatsNumber() == 0);
+            List<PricingDTO> pricingWithFreeSeats = new ArrayList<>();
 
-            if (pricingList.isEmpty()) {
-                trainDTOList.remove(train);
+            for (PricingDTO pricing : pricingList) {
+                if (pricing.getSeatsNumber() > 0) {
+                    pricingWithFreeSeats.add(pricing);
+                }
+            }
+
+            if (!pricingWithFreeSeats.isEmpty()) {
+                train.setPricingDTOList(pricingWithFreeSeats);
+                trainsWithFreeSeats.add(train);
             }
         }
 
-        return trainDTOList;
+        return trainsWithFreeSeats;
     }
 }

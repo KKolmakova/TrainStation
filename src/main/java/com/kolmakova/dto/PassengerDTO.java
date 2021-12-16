@@ -1,9 +1,7 @@
 package com.kolmakova.dto;
 
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.sql.Date;
+import java.util.List;
 
 public class PassengerDTO {
 
@@ -14,6 +12,7 @@ public class PassengerDTO {
     private Date birthDate;
     private String documentType;
     private String documentSeries;
+    private List<PaymentDTO> paymentDTOList;
 
     public void setId(int id) {
         this.id = id;
@@ -69,6 +68,14 @@ public class PassengerDTO {
 
     public String getDocumentSeries() {
         return documentSeries;
+    }
+
+    public List<PaymentDTO> getPaymentDTOList() {
+        return paymentDTOList;
+    }
+
+    public void setPaymentDTOList(List<PaymentDTO> paymentDTOList) {
+        this.paymentDTOList = paymentDTOList;
     }
 
     @Override

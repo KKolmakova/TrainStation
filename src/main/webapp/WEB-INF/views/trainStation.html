@@ -26,7 +26,7 @@
         <input id="departure_date" name="departureDate" type="date"/><br>
 
         <label for="departure_time">Enter departure time: </label>
-        <input id="departure_time" name="departureTime" type="text"/><br>
+        <input id="departure_time" name="departureTime" type="time"/><br>
 
         <input value="Find" type="submit"/>
     </form>
@@ -43,7 +43,7 @@
                 <td>
                     <div th:each="pricing: ${train.getPricingDTOList()}">
                         <form th:method="GET"
-                              th:action="@{/find/trains/__${response.getTrainsIds()}__/train/__${pricing.getTrainId()}__/pricing/__${pricing.getId()}__/print}">
+                              th:action="@{/registration/pricing/__${pricing.getId()}__/print}">
                             <p th:text="${pricing.toString()}"></p>
                             <input value="Choose" type="submit"/>
                         </form>
@@ -73,7 +73,7 @@
         <input id="sex" name="sex" type="text"/><br>
 
         <label for="birth_date">Enter birth date: </label>
-        <input id="birth_date" type="date" name="birthDate"/><br>
+        <input id="birth_date" name="birthDate" type="data"/><br>
 
         <label for="document_type">Enter document type: </label>
         <input id="document_type" name="documentType" type="text"/><br>
@@ -82,13 +82,6 @@
         <input id="document_series" name="documentSeries" type="text"/><br>
 
         <input type="submit" value="Create"/>
-
-        <h3>Here's what was found</h3>
-        <div th:each="train: ${response.getTrainDTOList()}">
-            <form th:method="GET" action="choose">
-                <p th:text="${train.toString()}"></p>
-            </form>
-        </div>
     </form>
 </th:block>
 
@@ -99,14 +92,32 @@
         <p th:text="${response.getPassengerDTO().toString()}"></p>
         <h4>Registered on train: </h4>
         <p th:text="${response.getTrainDTO().toString()}"></p>
+        <h4>Pricing: </h4>
+        <p th:text="${response.getPricingDTO().toString()}"></p>
         <h4>Amount: </h4>
         <p th:text="${response.getPaymentDTO().getAmount()}"></p>
 
         <input type="submit" value="Ok"/>
     </form>
-    <!--    <form th:method="GET" action="/search">-->
-    <!--        <input type="submit" value="View all payments"/>-->
-    <!--    </form>-->
+    <form th:method="GET" th:action="@{passenger/__${response.getPassengerDTO().getId()}__/receipts}">
+        <input value="See all receipts" type="submit"/>
+    </form>
+</th:block>
+
+<th:block th:if="${receipts}">
+    <form th:method="GET" action="/search">
+        <h3>Personal data: </h3>
+
+        <h4>Passenger: </h4>
+        <p th:text="${response.getPassengerDTO().toString()}"></p>
+
+        <h4>Receipts: </h4>
+        <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}">
+            <p th:text="${pricing.toString()}"></p>
+        </div>
+
+        <input type="submit" value="Return to search trains"/>
+    </form>
 </th:block>
 
 <th:block th:if="${sign_in}">

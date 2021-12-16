@@ -2,6 +2,7 @@ package com.kolmakova.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Table(name = "Train")
@@ -22,7 +23,7 @@ public class Train {
     private Date departureDate;
 
     @Column(name = "departure_time")
-    private String departureTime;
+    private Time departureTime;
 
     @Column(name = "kilometers")
     private int kilometers;
@@ -63,11 +64,11 @@ public class Train {
         this.departureDate = departureDate;
     }
 
-    public String getDepartureTime() {
+    public Time getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 

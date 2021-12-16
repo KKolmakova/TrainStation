@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface RegistrationResponseService {
 
-    RegistrationOnTrainResponse getResponse(Integer trainId, Integer pricingId, List<Integer> trainsIds);
+    RegistrationOnTrainResponse getResponse(Integer pricingId);
 }

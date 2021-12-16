@@ -26,18 +26,14 @@ public class RegistrationResponseServiceImpl implements RegistrationResponseServ
     private Converter converter;
 
     @Override
-    public RegistrationOnTrainResponse getResponse(Integer trainId, Integer pricingId, List<Integer> trainsIds) {
+    public RegistrationOnTrainResponse getResponse(Integer pricingId) {
         RegistrationOnTrainResponse registrationOnTrainResponse = new RegistrationOnTrainResponse();
 
-        TrainDTO trainDTO = converter.convertToTrainDTO(getTrain(trainId));
-        List<TrainDTO> trainDTOList = getTrainDTOList(trainsIds);
         PricingDTO pricingDTO = converter.convertToPricingDTO(pricingService.getPricingById(pricingId));
-        String trainsUrl = trainService.getSelectedTrainsUrl(trainService.getTrainsByIds(trainsIds));
+        TrainDTO trainDTO = converter.convertToTrainDTO(getTrain(pricingDTO.getTrainId()));
 
         registrationOnTrainResponse.setSelectTrainDTO(trainDTO);
-        registrationOnTrainResponse.setTrainDTOList(trainDTOList);
         registrationOnTrainResponse.setPricingDTO(pricingDTO);
-        registrationOnTrainResponse.setTrainsIds(trainsUrl);
 
         return registrationOnTrainResponse;
     }
