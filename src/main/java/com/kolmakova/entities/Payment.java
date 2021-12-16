@@ -20,7 +20,7 @@ public class Payment {
     private Passenger passenger;
 
     @Column(name = "amount")
-    private Double amount;
+    private double amount;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class Payment {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

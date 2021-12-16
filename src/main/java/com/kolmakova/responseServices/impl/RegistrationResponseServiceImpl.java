@@ -1,9 +1,11 @@
 package com.kolmakova.responseServices.impl;
 
+import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Train;
-import com.kolmakova.responseServices.TrainResponseService;
-import com.kolmakova.responses.TrainResponse;
+import com.kolmakova.responseServices.RegistrationResponseService;
+import com.kolmakova.responses.RegistrationOnTrainResponse;
+import com.kolmakova.services.PricingService;
 import com.kolmakova.services.TrainService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +16,30 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TrainResponseServiceImpl implements TrainResponseService {
+public class RegistrationResponseServiceImpl implements RegistrationResponseService {
 
     @Autowired
     private TrainService trainService;
     @Autowired
+    private PricingService pricingService;
+    @Autowired
     private Converter converter;
 
     @Override
-    public TrainResponse getResponse(Integer trainId, List<Integer> trainsIds) {
-        TrainResponse trainResponse = new TrainResponse();
+    public RegistrationOnTrainResponse getResponse(Integer trainId, Integer pricingId, List<Integer> trainsIds) {
+        RegistrationOnTrainResponse registrationOnTrainResponse = new RegistrationOnTrainResponse();
 
         TrainDTO trainDTO = converter.convertToTrainDTO(getTrain(trainId));
         List<TrainDTO> trainDTOList = getTrainDTOList(trainsIds);
+        PricingDTO pricingDTO = converter.convertToPricingDTO(pricingService.getPricingById(pricingId));
         String trainsUrl = trainService.getSelectedTrainsUrl(trainService.getTrainsByIds(trainsIds));
 
-        trainResponse.setSelectTrainDTO(trainDTO);
-        trainResponse.setTrainDTOList(trainDTOList);
-        trainResponse.setTrainsIds(trainsUrl);
+        registrationOnTrainResponse.setSelectTrainDTO(trainDTO);
+        registrationOnTrainResponse.setTrainDTOList(trainDTOList);
+        registrationOnTrainResponse.setPricingDTO(pricingDTO);
+        registrationOnTrainResponse.setTrainsIds(trainsUrl);
 
-        return trainResponse;
+        return registrationOnTrainResponse;
     }
 
     private Train getTrain(Integer trainId) {

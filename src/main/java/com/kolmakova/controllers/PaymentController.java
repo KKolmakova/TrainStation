@@ -27,7 +27,8 @@ public class PaymentController {
 
     @PostMapping("/create")
     public String createPayment(PassengerDTO passengerDTO,
-                                @RequestParam("trainId") Integer trainId) {
-        return "redirect:" + paymentResponseService.create(passengerDTO, trainId).getPaymentDTO().getId();
+                                @RequestParam("trainId") Integer trainId,
+                                @RequestParam("pricingId") Integer pricingId) {
+        return "redirect:" + paymentResponseService.create(passengerDTO, trainId, pricingId).getPaymentDTO().getId();
     }
 }

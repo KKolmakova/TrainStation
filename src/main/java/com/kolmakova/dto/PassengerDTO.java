@@ -1,15 +1,19 @@
 package com.kolmakova.dto;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
+
 public class PassengerDTO {
 
     private int id;
     private String name;
     private String surname;
     private String sex;
-    private String birthDate;
+    private Date birthDate;
     private String documentType;
     private String documentSeries;
-    private Boolean isDeleted;
 
     public void setId(int id) {
         this.id = id;
@@ -27,7 +31,7 @@ public class PassengerDTO {
         this.sex = sex;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -55,7 +59,7 @@ public class PassengerDTO {
         return sex;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
@@ -65,14 +69,6 @@ public class PassengerDTO {
 
     public String getDocumentSeries() {
         return documentSeries;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
     }
 
     @Override
@@ -85,7 +81,6 @@ public class PassengerDTO {
                 ", birthDate='" + birthDate + '\'' +
                 ", documentType='" + documentType + '\'' +
                 ", documentSeries='" + documentSeries + '\'' +
-                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

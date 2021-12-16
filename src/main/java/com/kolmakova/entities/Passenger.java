@@ -1,6 +1,7 @@
 package com.kolmakova.entities;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Table(name = "Passenger")
 @Entity
@@ -18,7 +19,7 @@ public class Passenger {
     private String sex;
 
     @Column(name = "birth_date")
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "document_type")
     private String documentType;
@@ -42,7 +43,7 @@ public class Passenger {
         this.sex = sex;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -70,7 +71,7 @@ public class Passenger {
         return sex;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 

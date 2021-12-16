@@ -1,11 +1,7 @@
 package com.kolmakova.utils;
 
-import com.kolmakova.dto.PassengerDTO;
-import com.kolmakova.dto.PaymentDTO;
-import com.kolmakova.dto.TrainDTO;
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Payment;
-import com.kolmakova.entities.Train;
+import com.kolmakova.dto.*;
+import com.kolmakova.entities.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +15,13 @@ public class Converter {
         TrainDTO trainDTO = new TrainDTO();
         BeanUtils.copyProperties(train, trainDTO);
 
+        List<PricingDTO> pricingDTOList = new ArrayList<>();
+
+        for (Pricing pricing : train.getPricingList()) {
+            pricingDTOList.add(convertToPricingDTO(pricing));
+        }
+        trainDTO.setPricingDTOList(pricingDTOList);
+
         return trainDTO;
     }
 
@@ -29,15 +32,32 @@ public class Converter {
         return passengerDTO;
     }
 
-    public PaymentDTO convertToPaymentDTO(Payment payment){
+    public PaymentDTO convertToPaymentDTO(Payment payment) {
         PaymentDTO paymentDTO = new PaymentDTO();
         BeanUtils.copyProperties(payment, paymentDTO);
 
         return paymentDTO;
     }
 
+    public PricingDTO convertToPricingDTO(Pricing pricing) {
+        PricingDTO pricingDTO = new PricingDTO();
+        ComfortDTO comfortDTO = convertComfortDTO(pricing.getComfortType());
+
+        BeanUtils.copyProperties(pricing, pricingDTO);
+        pricingDTO.setComfortDTO(comfortDTO);
+
+        return pricingDTO;
+    }
+
+    public ComfortDTO convertComfortDTO(Comfort comfort) {
+        ComfortDTO comfortDTO = new ComfortDTO();
+        BeanUtils.copyProperties(comfort, comfortDTO);
+
+        return comfortDTO;
+    }
+
     public List<PaymentDTO> convertToPaymentDTOList(List<Payment> paymentList) {
-       List<PaymentDTO> paymentDTOList = new ArrayList<>();
+        List<PaymentDTO> paymentDTOList = new ArrayList<>();
 
         for (Payment payment : paymentList) {
             paymentDTOList.add(convertToPaymentDTO(payment));

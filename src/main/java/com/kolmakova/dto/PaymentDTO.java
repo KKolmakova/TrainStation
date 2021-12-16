@@ -1,14 +1,11 @@
 package com.kolmakova.dto;
 
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Train;
-
 public class PaymentDTO {
 
     private Integer id;
-    private Train train;
-    private Passenger passenger;
-    private Double amount;
+    private TrainDTO trainDTO;
+    private PassengerDTO passengerDTO;
+    private double amount;
 
     public Integer getId() {
         return id;
@@ -18,27 +15,37 @@ public class PaymentDTO {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public TrainDTO getTrainDTO() {
+        return trainDTO;
+    }
+
+    public void setTrainDTO(TrainDTO trainDTO) {
+        this.trainDTO = trainDTO;
+    }
+
+    public PassengerDTO getPassengerDTO() {
+        return passengerDTO;
+    }
+
+    public void setPassengerDTO(PassengerDTO passengerDTO) {
+        this.passengerDTO = passengerDTO;
+    }
+
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Train getTrain() {
-        return train;
-    }
-
-    public void setTrain(Train train) {
-        this.train = train;
-    }
-
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
+    @Override
+    public String toString() {
+        return "PaymentDTO{" +
+                "id=" + id +
+                ", trainDTO=" + trainDTO +
+                ", passengerDTO=" + passengerDTO +
+                ", amount=" + amount +
+                '}';
     }
 }

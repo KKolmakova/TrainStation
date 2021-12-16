@@ -5,11 +5,13 @@ import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
+import com.kolmakova.entities.Pricing;
 import com.kolmakova.entities.Train;
 import com.kolmakova.responseServices.PaymentResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.services.PaymentService;
+import com.kolmakova.services.PricingService;
 import com.kolmakova.services.TrainService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +30,21 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     @Autowired
     private TrainService trainService;
     @Autowired
+    private PricingService pricingService;
+    @Autowired
     private Converter converter;
 
     @Override
-    public PaymentResponse create(PassengerDTO passengerDTO, int trainId) {
+    public PaymentResponse create(PassengerDTO passengerDTO, int trainId, int pricingId) {
         PaymentResponse paymentResponse = new PaymentResponse();
 
         Passenger passenger = savePassenger(passengerDTO);
         Train train = getTrain(trainId);
-        Double amount = 100.0;
+
+        Pricing pricing = pricingService.getPricingById(pricingId);
+        Double amount = pricing.getPrice();
+
+        savePricing(pricing);
 
         Payment payment = Payment.builder()
                 .setPassenger(passenger)
@@ -71,6 +79,11 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
 
     private Passenger savePassenger(PassengerDTO passengerDTO) {
         return passengerService.savePassenger(converter.convertToPassenger(passengerDTO));
+    }
+
+    private void savePricing(Pricing pricing) {
+        pricing.setSeatsNumber(pricing.getSeatsNumber() - 1);
+        pricingService.savePricing(pricing);
     }
 
     private Train getTrain(int trainId) {

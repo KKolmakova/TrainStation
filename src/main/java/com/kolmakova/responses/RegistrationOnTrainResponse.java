@@ -1,11 +1,13 @@
 package com.kolmakova.responses;
+import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
 import java.util.List;
 
-public class TrainResponse {
+public class RegistrationOnTrainResponse {
 
     private TrainDTO selectedTrainDTO;
     private List<TrainDTO> trainDTOList;
+    private PricingDTO pricingDTO;
     private String trainsIds;
 
     public String getTrainsIds() {
@@ -22,6 +24,22 @@ public class TrainResponse {
 
     public void setSelectTrainDTO(TrainDTO trainDTO) {
         this.selectedTrainDTO = trainDTO;
+    }
+
+    public TrainDTO getSelectedTrainDTO() {
+        return selectedTrainDTO;
+    }
+
+    public void setSelectedTrainDTO(TrainDTO selectedTrainDTO) {
+        this.selectedTrainDTO = selectedTrainDTO;
+    }
+
+    public PricingDTO getPricingDTO() {
+        return pricingDTO;
+    }
+
+    public void setPricingDTO(PricingDTO pricingDTO) {
+        this.pricingDTO = pricingDTO;
     }
 
     public List<TrainDTO> getTrainDTOList() {
