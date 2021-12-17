@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,7 +52,7 @@ public class TrainService {
         return trainRepository.findAllById(id);
     }
 
-    public List<Train> getByParameters(String arrivalPlace, Date departureDate, LocalTime departureTime) {
+    public List<Train> getByParameters(String arrivalPlace, Date departureDate, Date departureTime) {
         Specification<Train> specification = Specification.where(null);
 
         if (StringUtils.isNotEmpty(arrivalPlace)) {
@@ -73,7 +76,7 @@ public class TrainService {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("departureDate"), departureDate);
     }
 
-    public static Specification<Train> matchesDepartureTime(LocalTime departureTime) {
+    public static Specification<Train> matchesDepartureTime(Date departureTime) {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("departureTime"), departureTime);
     }
 }

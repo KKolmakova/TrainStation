@@ -2,10 +2,7 @@ package com.kolmakova.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.sql.Date;
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 public class TrainDTO {
@@ -13,11 +10,10 @@ public class TrainDTO {
     private Integer id;
     private int number;
     private String arrivalPlace;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
     private Date departureDate;
-    @DateTimeFormat(pattern="HH:mm")
-    @Temporal(TemporalType.TIME)
-    private LocalTime departureTime;
+    @DateTimeFormat(pattern = "HH:mm", iso = DateTimeFormat.ISO.TIME)
+    private Date departureTime;
     private int kilometers;
     private List<PricingDTO> pricingDTOList;
 
@@ -53,11 +49,11 @@ public class TrainDTO {
         this.departureDate = departureDate;
     }
 
-    public LocalTime getDepartureTime() {
+    public Date getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalTime departureTime) {
+    public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
 
