@@ -2,11 +2,10 @@ package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
-import com.kolmakova.entities.Pricing;
 import com.kolmakova.entities.Train;
 import com.kolmakova.responseServices.SearchResponseService;
 import com.kolmakova.responses.RegistrationOnTrainResponse;
-import com.kolmakova.services.TrainService;
+import com.kolmakova.services.impl.TrainServiceImpl;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import java.util.List;
 public class SearchResponseServiceImpl implements SearchResponseService {
 
     @Autowired
-    private TrainService trainService;
+    private TrainServiceImpl trainService;
     @Autowired
     private Converter converter;
 
@@ -28,7 +27,6 @@ public class SearchResponseServiceImpl implements SearchResponseService {
     public RegistrationOnTrainResponse getResponse(TrainDTO trainDTO) {
         RegistrationOnTrainResponse registrationOnTrainResponse = new RegistrationOnTrainResponse();
 
-//        List<Train> trains = trainService.getByArrivalPlace(trainDTO.getArrivalPlace());
         List<Train> trains = trainService.getByParameters(trainDTO.getArrivalPlace(), trainDTO.getDepartureDate(), trainDTO.getDepartureTime());
         List<TrainDTO> trainDTOList = getTrainsWithFreePlaces(converter.convertToTrainDTOList(trains));
 

@@ -42,7 +42,7 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
         Passenger passenger = savePassenger(passengerDTO);
         Train train = getTrain(trainId);
 
-        Pricing pricing = pricingService.getPricingById(pricingId);
+        Pricing pricing = pricingService.getOne(pricingId);
         Double amount = pricing.getPrice();
 
         savePricing(pricing);
@@ -54,7 +54,7 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
                 .setAmount(amount)
                 .build();
 
-        paymentService.savePayment(payment);
+        paymentService.save(payment);
         PaymentDTO savedPaymentDTO = converter.convertToPaymentDTO(payment);
 
         paymentResponse.setPaymentDTO(savedPaymentDTO);
@@ -66,7 +66,7 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     public PaymentResponse getResponse(int paymentId) {
         PaymentResponse paymentResponse = new PaymentResponse();
 
-        Payment payment = paymentService.getPaymentById(paymentId);
+        Payment payment = paymentService.getOne(paymentId);
 
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(payment);
         PassengerDTO passengerDTO = converter.convertToPassengerDTO(payment.getPassenger());
@@ -82,15 +82,15 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     }
 
     private Passenger savePassenger(PassengerDTO passengerDTO) {
-        return passengerService.savePassenger(converter.convertToPassenger(passengerDTO));
+        return passengerService.save(converter.convertToPassenger(passengerDTO));
     }
 
     private void savePricing(Pricing pricing) {
         pricing.setSeatsNumber(pricing.getSeatsNumber() - 1);
-        pricingService.savePricing(pricing);
+        pricingService.save(pricing);
     }
 
     private Train getTrain(int trainId) {
-        return trainService.getTrainById(trainId);
+        return trainService.getOne(trainId);
     }
 }

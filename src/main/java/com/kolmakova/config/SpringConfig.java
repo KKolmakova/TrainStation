@@ -15,9 +15,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -27,18 +25,18 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.kolmakova")
+@ComponentScan("com.kolmakova.*")
 @EnableWebMvc
-@EnableJpaRepositories("com.kolmakova")
+@EnableJpaRepositories("com.kolmakova.repositories")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-public class SpringConfig implements WebMvcConfigurer{
+public class SpringConfig implements WebMvcConfigurer {
 
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private Environment env;
-    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova";
+    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
 
     @Bean
     public DataSource dataSource() {
@@ -52,7 +50,7 @@ public class SpringConfig implements WebMvcConfigurer{
         return dataSource;
     }
 
-    private Properties getHibernateProperty(){
+    private Properties getHibernateProperty() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
@@ -65,7 +63,7 @@ public class SpringConfig implements WebMvcConfigurer{
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan(new String[] {COMPONENT_SCAN_PACKAGE});
+        factoryBean.setPackagesToScan(new String[]{COMPONENT_SCAN_PACKAGE});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(getHibernateProperty());
         factoryBean.afterPropertiesSet();
@@ -120,4 +118,18 @@ public class SpringConfig implements WebMvcConfigurer{
         resolver.setTemplateEngine(templateEngine(templateResolver()));
         registry.viewResolver(resolver);
     }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/pictures/**")
+                .addResourceLocations("/resources/pictures/");
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("/resources/css/");
+    }
+
 }

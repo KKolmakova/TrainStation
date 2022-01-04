@@ -1,11 +1,11 @@
 package com.kolmakova.dto;
 
-import com.kolmakova.types.String;
+import com.kolmakova.types.WagonType;
 
 public class ComfortDTO {
 
     private Integer id;
-    private String type;
+    private WagonType type;
 
     public Integer getId() {
         return id;
@@ -15,11 +15,11 @@ public class ComfortDTO {
         this.id = id;
     }
 
-    public String getType() {
+    public WagonType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(WagonType type) {
         this.type = type;
     }
 

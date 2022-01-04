@@ -1,21 +1,9 @@
 package com.kolmakova.services;
 
 import com.kolmakova.entities.Passenger;
-import com.kolmakova.repositories.PassengerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class PassengerService {
+public interface PassengerService {
+    Passenger getOne(int passengerId);
 
-    @Autowired
-    private PassengerRepository passengerRepository;
-
-    public Passenger savePassenger(Passenger passenger) {
-        return passengerRepository.save(passenger);
-    }
-
-    public Passenger getPassengerById(int passengerId){
-        return passengerRepository.getOne(passengerId);
-    }
+    Passenger save(Passenger passenger);
 }

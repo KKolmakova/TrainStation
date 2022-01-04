@@ -1,6 +1,6 @@
 package com.kolmakova.types;
 
-public enum String {
+public enum WagonType {
 
     RESERVED_SEAT,
     COMPARTMENT

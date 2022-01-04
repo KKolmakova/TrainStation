@@ -1,7 +1,6 @@
 package com.kolmakova.repositories;
 
 import com.kolmakova.entities.Train;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +14,7 @@ public interface TrainRepository extends JpaRepository<Train, Integer>, JpaSpeci
 
     @Query(value = "SELECT t FROM Train t WHERE arrival_place LIKE :arrivalPlace")
     List<Train> findTrainByArrival(@Param("arrivalPlace") String arrivalPlace);
+
+    @Query(value = "SELECT DISTINCT t.arrivalPlace FROM Train t")
+    List<String> getArrivalPlaces();
 }
