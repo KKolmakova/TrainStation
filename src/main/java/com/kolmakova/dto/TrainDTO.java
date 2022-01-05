@@ -14,6 +14,8 @@ public class TrainDTO {
     private Date departureDate;
     @DateTimeFormat(pattern = "HH:mm", iso = DateTimeFormat.ISO.TIME)
     private Date departureTime;
+    private String departureDateStr;
+    private String departureTimeStr;
     private int kilometers;
     private List<PricingDTO> pricingDTOList;
 
@@ -71,6 +73,22 @@ public class TrainDTO {
 
     public void setPricingDTOList(List<PricingDTO> pricingDTOList) {
         this.pricingDTOList = pricingDTOList;
+    }
+
+    public String getDepartureDateStr() {
+        return departureDateStr;
+    }
+
+    public void setDepartureDateStr(String departureDateStr) {
+        this.departureDateStr = departureDateStr;
+    }
+
+    public String getDepartureTimeStr() {
+        return departureTimeStr;
+    }
+
+    public void setDepartureTimeStr(String departureTimeStr) {
+        this.departureTimeStr = departureTimeStr;
     }
 
     @Override

@@ -1,0 +1,60 @@
+<div th:fragment="find">
+    <h3>Here's what was found</h3>
+
+    <div th:each="train: ${response.getTrainDTOList()}">
+        <table class="table table-striped">
+            <tr>
+                <th>Number</th>
+                <th>Arrival place</th>
+                <th>Departure date</th>
+                <th>Departure time</th>
+                <th>Kilometers</th>
+                <th>Comfort type</th>
+                <th>Free seats</th>
+                <th>Price</th>
+                <th>Reserve button</th>
+            </tr>
+            <tr>
+                <td>
+                    <p th:text="${train.getNumber()}"></p>
+                </td>
+                <td>
+                    <p th:text="${train.getArrivalPlace()}"></p>
+                </td>
+                <td>
+                    <p th:text="${train.getDepartureDateStr()}"></p>
+                </td>
+                <td>
+                    <p th:text="${train.getDepartureTimeStr()}"></p>
+                </td>
+                <td>
+                    <p th:text="${train.getKilometers()}"></p>
+                </td>
+                <div th:with="pricingList=${train.getPricingDTOList()}">
+                    <td>
+                        <div th:each="pricing: ${pricingList}">
+                            <p th:text="${pricing.getComfortDTO().getType()}"></p>
+                        </div>
+                    </td>
+                    <td>
+                        <div th:each="pricing: ${pricingList}">
+                            <p th:text="${pricing.getSeatsNumber()}"></p>
+                        </div>
+                    </td>
+                    <td>
+                        <div th:each="pricing: ${pricingList}">
+                            <p th:text="${pricing.getPrice()}"></p>
+                        </div>
+                    </td>
+                    <td>
+                        <div th:each="pricing: ${pricingList}">
+                            <form th:method="GET" th:action="@{/registration/pricing/__${pricing.getId()}__/print}">
+                                <button class="btn btn-outline-primary" type="submit">Reserve</button>
+                            </form>
+                        </div>
+                    </td>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>

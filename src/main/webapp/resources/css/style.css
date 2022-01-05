@@ -15,9 +15,9 @@ background-color: #8064A2;
 color:#FFF; 
 border-color: #381257;
 }   
-.table-striped>tbody>tr:nth-child(odd)>td, 
+/* .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
    background-color:#cfc7d8;
    border-color: #381257;
- }
+} */
  

@@ -1,0 +1,70 @@
+<div th:fragment="registrate">
+    <form th:method="POST" th:action="@{/payment/create}">
+
+        <input hidden name="trainId" th:value="${response.getSelectTrainDTO().getId()}"/>
+        <input hidden name="pricingId" th:value="${response.getPricingDTO().getId()}"/>
+
+        <h3>Registration of check</h3>
+
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="name" class="form-label">Name</label>
+                            <input class="form-control" id="name" name="name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="surname" class="form-label">Surname</label>
+                            <input class="form-control" id="surname" name="surname">
+                        </div>
+                        <div class="mb-2">
+                            <label for="document_type" class="form-label">Document type</label>
+                            <input class="form-control" id="document_type" name="documentType">
+                        </div>
+                        <div class="mb-2">
+                            <label for="document_series" class="form-label">Document series</label>
+                            <input class="form-control" id="document_series" name="documentSeries">
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-outline-primary" type="submit">Registrate</button>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card text-dark bg-light mb-3" style="max-width: 30rem;">
+                            <h5 class="card-header"
+                                th:text="${'Train number: '+ response.getSelectTrainDTO().getNumber}"></h5>
+                            <div class="card-body">
+                                <h6 class="card-title">Arrival point</h6>
+                                <p class="card-text" th:text="${response.getSelectTrainDTO().getArrivalPlace()}"></p>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Departure date</h5>
+                                <p class="card-text" th:text="${response.getSelectTrainDTO().getDepartureDateStr()}"></p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Departure time</h6>
+                                <p class="card-text" th:text="${response.getSelectTrainDTO().getDepartureTimeStr()}"></p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Kilometers</h6>
+                                <p class="card-text" th:text="${response.getSelectTrainDTO().getKilometers()}">
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Comfort type</h6>
+                                <p class="card-text" th:text="${response.getPricingDTO().getComfortDTO().getType()}">
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Price</h6>
+                                <p class="card-text" th:text="${response.getPricingDTO().getPrice()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

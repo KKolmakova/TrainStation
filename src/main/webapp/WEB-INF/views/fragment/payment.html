@@ -1,0 +1,71 @@
+<div th:fragment="payment">
+    <h3>Registration was successful</h3>
+
+    <div class="container">
+        <div class="row align-items-start">
+
+            <div class="row">
+
+                <div class="col">
+                    <div class="card text-dark bg-light mb-3" style="max-width: 30rem;">
+                        <h5 class="card-header" text="Passenger"></h5>
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h6 class="card-title">Name</h6>
+                                <p class="card-text" th:text="${response.getPassengerDTO().getSurname()}"></p>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="card-title">Document type</h6>
+                                <p class="card-text" th:text="${response.getPassengerDTO().getDocumentType()}"></p>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="card-title">Document series</h6>
+                                <p class="card-text" th:text="${response.getPassengerDTO().getDocumentSeries()}"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card text-dark bg-light mb-3" style="max-width: 30rem;">
+                            <h5 class="card-header"
+                                th:text="${'Train number: '+ response.getTrainDTO().getNumber}"></h5>
+                            <div class="card-body">
+                                <h6 class="card-title">Arrival point</h6>
+                                <p class="card-text" th:text="${response.getTrainDTO().getArrivalPlace()}"></p>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="card-title">Departure date</h6>
+                                <p class="card-text" th:text="${response.getTrainDTO().getDepartureDateStr()}"></p>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="card-title">Departure time</h6>
+                                <p class="card-text" th:text="${response.getTrainDTO().getDepartureTimeStr()}"></p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Kilometers</h6>
+                                <p class="card-text" th:text="${response.getTrainDTO().getKilometers()}">
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Comfort type</h6>
+                                <p class="card-text" th:text="${response.getPricingDTO().getComfortDTO().getType()}">
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Price</h6>
+                                <p class="card-text" th:text="${response.getPricingDTO().getPrice()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form th:method="GET" th:action="@{/payment/passenger/__${response.getPassengerDTO().getId()}__/receipts}">
+            <input type="submit" value="Ok"/>
+        </form>
+    </div>
+</div>
