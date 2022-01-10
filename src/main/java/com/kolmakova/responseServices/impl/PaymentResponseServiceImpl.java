@@ -4,21 +4,16 @@ import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Payment;
-import com.kolmakova.entities.Pricing;
-import com.kolmakova.entities.Train;
+import com.kolmakova.entities.*;
 import com.kolmakova.responseServices.PaymentResponseService;
 import com.kolmakova.responses.PaymentResponse;
-import com.kolmakova.services.PassengerService;
-import com.kolmakova.services.PaymentService;
-import com.kolmakova.services.PricingService;
-import com.kolmakova.services.TrainService;
+import com.kolmakova.services.*;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +27,8 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     private TrainService trainService;
     @Autowired
     private PricingService pricingService;
+    @Autowired
+    private DocumentService documentService;
     @Autowired
     private Converter converter;
 
@@ -82,7 +79,11 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     }
 
     private Passenger savePassenger(PassengerDTO passengerDTO) {
-        return passengerService.save(converter.convertToPassenger(passengerDTO));
+        Passenger passenger = converter.convertToPassenger(passengerDTO);
+        Optional<Document> document = documentService.getDocuments(passengerDTO.getDocumentDTO().getType());
+
+        passenger.setDocumentType(document.orElse(null));
+        return passengerService.save(passenger);
     }
 
     private void savePricing(Pricing pricing) {

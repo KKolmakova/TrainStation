@@ -4,9 +4,9 @@
 .nav-link{
     color: black;
 }
-.btn-outline-primary
-{ 
-background-color: #fdfdfd;
+/* .btn-outline-primary
+{  */
+/* background-color: #fdfdfd;
 color:hsl(267, 25%, 51%);
 border-color: #8064A2;
 }
@@ -14,7 +14,7 @@ border-color: #8064A2;
 background-color: #8064A2;
 color:#FFF; 
 border-color: #381257;
-}   
+}    */
 /* .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
    background-color:#cfc7d8;

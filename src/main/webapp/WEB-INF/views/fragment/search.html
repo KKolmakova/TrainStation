@@ -1,9 +1,6 @@
 <div th:fragment="search">
     <form th:method="GET" th:action="@{/search/found}">
-
-        <h3>Let's find the right train</h3>
-
-        <div class="container">
+        <div class="container mt-5">
             <div class="row align-items-center">
                 <div class="col">
                     <label for="arrival_place" class="form-label">Arrival place</label>
@@ -29,8 +26,8 @@
                         placeholder="Departure time" aria-label="Search">
                 </div>
 
-                <div class="col-1">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                <div class="col-sm-6 col-md-1">
+                    <button class="btn btn-outline-primary mt-4" type="submit">Search</button>
                 </div>
             </div>
         </div>

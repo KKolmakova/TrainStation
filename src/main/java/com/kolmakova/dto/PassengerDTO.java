@@ -8,7 +8,9 @@ public class PassengerDTO {
     private int id;
     private String name;
     private String surname;
-    private String documentType;
+    private String sex;
+    private Date birthDate;
+    private DocumentDTO documentDTO;
     private String documentSeries;
     private List<PaymentDTO> paymentDTOList;
 
@@ -24,8 +26,20 @@ public class PassengerDTO {
         this.surname = surname;
     }
 
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public DocumentDTO getDocumentDTO() {
+        return documentDTO;
+    }
+
+    public void setDocumentDTO(DocumentDTO documentDTO) {
+        this.documentDTO = documentDTO;
     }
 
     public void setDocumentSeries(String documentSeries) {
@@ -44,8 +58,16 @@ public class PassengerDTO {
         return surname;
     }
 
-    public String getDocumentType() {
-        return documentType;
+    public String getSex() {
+        return sex;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public DocumentDTO getDocumentType() {
+        return documentDTO;
     }
 
     public String getDocumentSeries() {
@@ -66,7 +88,9 @@ public class PassengerDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", documentType='" + documentType + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", documentType='" + documentDTO + '\'' +
                 ", documentSeries='" + documentSeries + '\'' +
                 '}';
     }

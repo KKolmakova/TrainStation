@@ -15,16 +15,7 @@
         <div th:include="fragment/navbar.html::navbar"></div>
     </header>
 
-    <!-- <form th:method="GET" action="define/sign_in">
-            <input value="Sign in" type="submit"/>
-        </form>
-        <form th:method="GET" action="define/sign_up">
-            <input value="Sign up" type="submit"/>
-        </form> -->
-
-
     <div class="container-xxl">
-
         <th:block th:if="${search}">
             <div th:include="fragment/search.html::search"></div>
         </th:block>
@@ -44,60 +35,12 @@
         <th:block th:if="${receipts}">
             <div th:include="fragment/receipts.html::receipts"></div>
         </th:block>
-
-        <!-- <th:block th:if="${sign_in}">
-            <form th:method="POST" action="/create">
-                <h3>Enter personal data:</h3>
-
-                <label for="name">Enter name: </label>
-                <input id="name" name="name" type="text" /><br>
-
-                <label for="surname">Enter surname: </label>
-                <input id="surname" name="surname" type="text" /><br>
-
-                <label for="sex">Enter sex: </label>
-                <input id="sex" name="sex" type="text" /><br>
-
-                <label for="birth_date">Enter birth date: </label>
-                <input id="birth_date" name="birthDate" type="text" /><br>
-
-                <label for="document_type">Enter document type: </label>
-                <input id="document_type" name="documentType" type="text" /><br>
-
-                <label for="document_series">Enter document series: </label>
-                <input id="document_series" name="documentSeries" type="text" /><br>
-
-                <h3>Create login and password:</h3>
-
-                <label for="name">Login: </label>
-                <input id="name" name="name" type="text" /><br>
-
-                <label for="surname">Password: </label>
-                <input id="surname" name="surname" type="text" /><br>
-
-                <input type="submit" value="Create" />
-            </form>
-        </th:block> -->
-
-        <!-- <th:block th:if="${sign_up}">
-            <form th:method="GET" action="/search">
-                <h3>Enter login and password:</h3>
-
-                <label for="login">Login: </label>
-                <input id="login" name="login" type="text" /><br>
-
-                <label for="password">Password: </label>
-                <input id="password" name="password" type="text" /><br>
-
-                <input type="submit" value="Create" />
-            </form>
-        </th:block> -->
     </div>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 </body>
-
 </html>

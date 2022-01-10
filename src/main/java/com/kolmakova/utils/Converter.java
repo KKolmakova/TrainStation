@@ -42,9 +42,11 @@ public class Converter {
     public PassengerDTO convertToPassengerDTO(Passenger passenger) {
         PassengerDTO passengerDTO = new PassengerDTO();
         List<PaymentDTO> paymentDTOList = convertToPaymentDTOList(passenger.getPaymentList());
+        DocumentDTO documentDTO = convertToDocumentDTO(passenger.getDocumentType());
 
         BeanUtils.copyProperties(passenger, passengerDTO);
         passengerDTO.setPaymentDTOList(paymentDTOList);
+        passengerDTO.setDocumentDTO(documentDTO);
 
         return passengerDTO;
     }
@@ -102,8 +104,18 @@ public class Converter {
 
     public Passenger convertToPassenger(PassengerDTO passengerDTO) {
         Passenger passenger = new Passenger();
+//        Document document = convertToDocument(passengerDTO.getDocumentDTO());
+
         BeanUtils.copyProperties(passengerDTO, passenger);
+//        passenger.setDocumentType(document);
 
         return passenger;
+    }
+
+    public DocumentDTO convertToDocumentDTO(Document document) {
+        DocumentDTO documentDTO = new DocumentDTO();
+        BeanUtils.copyProperties(document, documentDTO);
+
+        return documentDTO;
     }
 }

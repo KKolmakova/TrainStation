@@ -1,18 +1,15 @@
 <div th:fragment="receipts">
-    <h4>Passenger: </h4>
-    <p th:text="${response.getPassengerDTO().toString()}"></p>
-
-    <h4>Train: </h4>
-    <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}" th:with="train=${pricing.getTrainDTO()}">
-        <table class="table table-striped">
-            <tr>
-                <th>Number</th>
-                <th>Arrival place</th>
-                <th>Departure date</th>
-                <th>Comfort type</th>
-                <th>Price</th>
-                <th>Details</th>
-            </tr>
+    <table class="table table-striped">
+        <tr>
+            <th>Train number</th>
+            <th>Arrival place</th>
+            <th>Departure date</th>
+            <th>Comfort type</th>
+            <th>Price</th>
+            <th>Details</th>
+        </tr>
+        <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}"
+             th:with="train=${pricing.getTrainDTO()}">
             <tr>
                 <td>
                     <p th:text="${train.getNumber()}"></p>
@@ -27,7 +24,7 @@
                     <p th:text="${pricing.getPricingDTO().getComfortDTO().getType()}"></p>
                 </td>
                 <td>
-                    <p th:text="${pricing.getPricingDTO().getPrice()}"></p>
+                    <p th:text="${pricing.getPricingDTO().getPrice() + ' BYN'}"></p>
                 </td>
                 <td>
                     <form th:method="GET" th:action="@{/payment/__${pricing.getId()}__}">
@@ -35,20 +32,10 @@
                     </form>
                 </td>
             </tr>
-        </table>
-    </div>
+        </div>
+    </table>
 
     <form th:method="GET" th:action="@{/search}">
-        <h3>Personal data: </h3>
-
-        <h4>Passenger: </h4>
-        <p th:text="${response.getPassengerDTO().toString()}"></p>
-
-        <h4>Receipts: </h4>
-        <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}">
-            <p th:text="${pricing.toString()}"></p>
-        </div>
-
-        <input type="submit" value="Return to search trains"/>
+        <button class="btn btn-outline-primary" type="submit">Return to train search</button>
     </form>
 </div>
