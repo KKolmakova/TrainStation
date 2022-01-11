@@ -118,4 +118,12 @@ public class Converter {
 
         return documentDTO;
     }
+
+    public Account convertToAccount(AccountDto accountDto) {
+        Account account = new Account();
+
+        BeanUtils.copyProperties(accountDto, account);
+
+        return account;
+    }
 }

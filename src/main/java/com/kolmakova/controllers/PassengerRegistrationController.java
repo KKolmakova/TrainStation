@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/registration/pricing/{pricingId}")
-public class RegistrationController {
+public class PassengerRegistrationController {
 
     @Autowired
     private RegistrationResponseService registrationResponseService;

@@ -1,9 +1,11 @@
 package com.kolmakova.config;
 
+import com.kolmakova.types.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,25 +20,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    @Qualifier("customUserDetailsServiceImpl")
-//    private UserDetailsService userDetailsService;
+    @Autowired
+    @Qualifier("customUserDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/registration").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/", "/user/signUp").permitAll()
+                .antMatchers("/registration/**", "/payment/**").hasAuthority(Constants.USER_AUTHORITY)
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll();
+                .loginPage("/user/signIn")
+                .loginProcessingUrl("/login")
+                .permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean

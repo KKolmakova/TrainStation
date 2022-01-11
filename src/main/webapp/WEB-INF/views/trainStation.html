@@ -35,6 +35,14 @@
         <th:block th:if="${receipts}">
             <div th:include="fragment/receipts.html::receipts"></div>
         </th:block>
+
+        <th:block th:if="${signIn}">
+            <div th:include="fragment/security.html::signIn"></div>
+        </th:block>
+
+        <th:block th:if="${signUp}">
+            <div th:include="fragment/security.html::signUp"></div>
+        </th:block>
     </div>
 
     <!-- JavaScript Bundle with Popper -->

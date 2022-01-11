@@ -14,7 +14,6 @@ public class PaymentController {
 
     @Autowired
     private PaymentResponseService paymentResponseService;
-
     @Autowired
     private ReceiptsResponseService receiptsResponseService;
 
@@ -36,7 +35,7 @@ public class PaymentController {
 
     @GetMapping("/passenger/{passengerId}/receipts")
     private String printAllPayments(Model model,
-                                    @PathVariable("passengerId") Integer passengerId){
+                                    @PathVariable("passengerId") Integer passengerId) {
         model.addAttribute("receipts", true);
         model.addAttribute("response", receiptsResponseService.getResponse(passengerId));
 

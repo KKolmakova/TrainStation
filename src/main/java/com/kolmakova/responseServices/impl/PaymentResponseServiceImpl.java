@@ -9,15 +9,20 @@ import com.kolmakova.responseServices.PaymentResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.*;
 import com.kolmakova.utils.Converter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 public class PaymentResponseServiceImpl implements PaymentResponseService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentResponseServiceImpl.class);
 
     @Autowired
     private PaymentService paymentService;
@@ -30,6 +35,8 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     @Autowired
     private DocumentService documentService;
     @Autowired
+    private AccountService accountService;
+    @Autowired
     private Converter converter;
 
     @Override
@@ -37,6 +44,8 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
         PaymentResponse paymentResponse = new PaymentResponse();
 
         Passenger passenger = savePassenger(passengerDTO);
+        addPassengerToCurrentAccount(passenger);
+
         Train train = getTrain(trainId);
 
         Pricing pricing = pricingService.getOne(pricingId);
@@ -84,6 +93,22 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
 
         passenger.setDocumentType(document.orElse(null));
         return passengerService.save(passenger);
+    }
+
+    private void addPassengerToCurrentAccount(Passenger passenger) {
+        TrainStationUser authenticated = (TrainStationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Account> accountOptional = accountService.getOne(authenticated.getUsername());
+
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            List<Passenger> passengers = account.getPassengers();
+            passengers.add(passenger);
+
+            account.setPassengers(passengers);
+            accountService.save(account);
+        } else {
+            LOGGER.error("Can't find account for user with login: {}", authenticated.getUsername());
+        }
     }
 
     private void savePricing(Pricing pricing) {
