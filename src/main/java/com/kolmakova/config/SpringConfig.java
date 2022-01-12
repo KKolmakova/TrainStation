@@ -144,6 +144,10 @@ public class SpringConfig implements WebMvcConfigurer {
     @Qualifier("userAccessPaymentInterceptor")
     private HandlerInterceptor userAccessPaymentInterceptor;
 
+    @Autowired
+    @Qualifier("userAccessAllPaymentsInterceptor")
+    private HandlerInterceptor userAccessAllPaymentsInterceptor;
+
     //    localization
 
     @Bean(name = "messageSource")
@@ -171,6 +175,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
 
 //        security
-//        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/**");
+        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/{id}");
+        registry.addInterceptor(userAccessAllPaymentsInterceptor).addPathPatterns("/payment/passenger/{passengerId}/receipts");
     }
 }

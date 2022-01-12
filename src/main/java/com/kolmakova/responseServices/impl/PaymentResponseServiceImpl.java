@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -96,7 +97,7 @@ public class PaymentResponseServiceImpl implements PaymentResponseService {
     }
 
     private void addPassengerToCurrentAccount(Passenger passenger) {
-        TrainStationUser authenticated = (TrainStationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticated = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<Account> accountOptional = accountService.getOne(authenticated.getUsername());
 
         if (accountOptional.isPresent()) {

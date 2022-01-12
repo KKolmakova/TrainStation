@@ -4,8 +4,6 @@ import com.kolmakova.entities.Account;
 import com.kolmakova.security.utils.HttpRequestUtils;
 import com.kolmakova.services.PassengerService;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
@@ -19,13 +17,9 @@ import java.util.Map;
 
 import static com.kolmakova.security.utils.HttpRequestUtils.ACCESS_DENIED_MESSAGE;
 
-@Component("userAccessPaymentInterceptor")
-public class UserAccessPaymentInterceptor implements HandlerInterceptor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserAccessPaymentInterceptor.class);
-
-    private static final String ID_PATH_VARIABLE = "id";
+@Component("userAccessAllPaymentsInterceptor")
+public class UserAccessAllPaymentsInterceptor implements HandlerInterceptor {
     private static final String PASSENGER_ID_PATH_VARIABLE = "passengerId";
-
 
     @Autowired
     private PassengerService passengerService;
@@ -38,15 +32,16 @@ public class UserAccessPaymentInterceptor implements HandlerInterceptor {
         Account account = httpRequestUtils.getFromRequest(request);
         Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
-        if (!pathVariables.containsKey(ID_PATH_VARIABLE) || !NumberUtils.isParsable(pathVariables.get(ID_PATH_VARIABLE))) {
+        if (!pathVariables.containsKey(PASSENGER_ID_PATH_VARIABLE) || !NumberUtils.isParsable(pathVariables.get(PASSENGER_ID_PATH_VARIABLE))) {
             return true;
         }
 
-        Integer paymentId = Integer.parseInt(pathVariables.get(ID_PATH_VARIABLE));
-        boolean hasAccess = passengerService.containsPayment(account.getPassengers(), paymentId);
+        Integer passengerId = Integer.parseInt(pathVariables.get(PASSENGER_ID_PATH_VARIABLE));
+        boolean hasAccess = passengerService.containsPassenger(account.getPassengers(), passengerId);
         if (!hasAccess) {
             throw new AccessDeniedException(ACCESS_DENIED_MESSAGE);
         }
+
         return true;
     }
 }

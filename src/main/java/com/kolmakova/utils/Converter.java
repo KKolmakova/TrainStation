@@ -104,10 +104,8 @@ public class Converter {
 
     public Passenger convertToPassenger(PassengerDTO passengerDTO) {
         Passenger passenger = new Passenger();
-//        Document document = convertToDocument(passengerDTO.getDocumentDTO());
 
         BeanUtils.copyProperties(passengerDTO, passenger);
-//        passenger.setDocumentType(document);
 
         return passenger;
     }
