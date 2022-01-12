@@ -1,0 +1,31 @@
+<div th:fragment="securityNavbar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-xxl">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-tabs">
+                            <img th:src="@{/img/train1.png}" width="100" height="60"/>
+                        </ul>
+                    </div>
+
+                    <div class="col-3">
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item">
+                                <img id="en" th:src="@{/img/eng.png}" class="mt-4" width="35" height="20">
+                                <img id="ru" th:src="@{/img/rus.png}" class="mt-4" width="35" height="20">
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mt-2" th:href="@{/user/signIn}">Sign in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mt-2" th:href="@{/user/signUp}"> Sign up </a>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

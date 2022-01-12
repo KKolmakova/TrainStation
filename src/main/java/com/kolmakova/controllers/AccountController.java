@@ -4,6 +4,7 @@ import com.kolmakova.dto.AccountDto;
 import com.kolmakova.responseServices.AccountResponseService;
 import com.kolmakova.responses.AccountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -19,6 +21,11 @@ public class AccountController {
 
     @Autowired
     private AccountResponseService accountResponseService;
+
+   public static Object getPrincipal(){
+       return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+   }
 
     @GetMapping({"/signIn", "/signIn/{registered}"})
     public String getSignInPage(@PathVariable(value = "registered", required = false) Boolean registered, Model model) {
@@ -28,14 +35,14 @@ public class AccountController {
 
         model.addAttribute("signIn", true);
 
-        return "trainStation";
+        return "security";
     }
 
     @GetMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("signUp", true);
 
-        return "trainStation";
+        return "security";
     }
 
     @PostMapping("/signUp")
@@ -45,7 +52,7 @@ public class AccountController {
         if (response.isUserAlreadyExists()) {
             model.addAttribute("signUp", true);
             model.addAttribute("response", response);
-            return "trainStation";
+            return "security";
         }
 
         return "redirect: " + request.getContextPath() + "/user/signIn/true";

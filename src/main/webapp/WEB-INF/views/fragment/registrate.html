@@ -10,7 +10,7 @@
                     <div class="col-5">
                         <div class="card text-dark bg-light mb-1" style="max-width: 30rem;">
                             <h5 class="card-header"
-                                th:text="${'Train number: '+ response.getSelectTrainDTO().getNumber}"></h5>
+                                th:text="${'Train number: '+ response.getSelectTrainDTO().getNumber()}"></h5>
                             <div class="card-body">
                                 <h6 class="card-title">Arrival point</h6>
                                 <p class="card-text" th:text="${response.getSelectTrainDTO().getArrivalPlace()}"></p>

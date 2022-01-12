@@ -1,35 +1,81 @@
 <div th:fragment="search">
     <form th:method="GET" th:action="@{/search/found}">
-        <div class="container mt-5">
-            <div class="row align-items-center">
-                <div class="col">
-                    <label for="arrival_place" class="form-label">Arrival place</label>
-                    <input id="arrival_place" name="arrivalPlace" class="form-control" list="datalistOptions"
-                        placeholder="Arrival palce">
+        <div class="card bg-dark text-white">
+            <img th:src="@{/img/railway1.png}" class="card-img" alt="#">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Search by requirements</h5>
+                <p class="card-text">
+                <div class="container mt-5">
 
-                    <datalist id="datalistOptions">
-                        <div th:each="arrival: ${arrivalResponse.getTrainsArrivalPlaces()}">
-                            <option th:value="${arrival}"></option>
+                    <div class="row align-items-center">
+                        <div class="col">
+<!--                            <p class="text-white bg-dark"><label for="arrival_place" class="form-label">Arrival-->
+                                place</label>
+                                <input id="arrival_place" name="arrivalPlace" class="form-control"
+                                       list="datalistOptions"
+                                       placeholder="Arrival palce">
+<!--                            </p>-->
+
+                            <datalist id="datalistOptions">
+                                <div th:each="arrival: ${arrivalResponse.getTrainsArrivalPlaces()}">
+                                    <option th:value="${arrival}"></option>
+                                </div>
+                            </datalist>
                         </div>
-                    </datalist>
-                </div>
 
-                <div class="col">
-                    <label for="departure_date" class="form-label">Departure date</label>
-                    <input id="departure_date" name="departureDate" class="form-control me-2" type="date"
-                        placeholder="Departure date" aria-label="Search">
-                </div>
+                        <div class="col">
+                            <label for="departure_date" class="form-label">Departure date</label>
+                            <input id="departure_date" name="departureDate" class="form-control me-2" type="date"
+                                   placeholder="Departure date" aria-label="Search">
+                        </div>
 
-                <div class="col">
-                    <label for="departure_time" class="form-label">Departure time</label>
-                    <input id="departure_time" name="departureTime" class="form-control me-2" type="time"
-                        placeholder="Departure time" aria-label="Search">
-                </div>
+                        <div class="col">
+                            <label for="departure_time" class="form-label">Departure time</label>
+                            <input id="departure_time" name="departureTime" class="form-control me-2" type="time"
+                                   placeholder="Departure time" aria-label="Search">
+                        </div>
 
-                <div class="col-sm-6 col-md-1">
-                    <button class="btn btn-outline-primary mt-4" type="submit">Search</button>
+                        <div class="col-sm-6 col-md-1">
+                            <button class="btn btn-outline-primary mt-4" type="submit">Search</button>
+                        </div>
+                    </div>
+                    </p>
                 </div>
+                </p>
             </div>
+            <!--            <div class="card-text">-->
+            <!--                <div class="container mt-5">-->
+            <!--                    <div class="row align-items-center">-->
+            <!--                        <div class="col">-->
+            <!--                            <label for="arrival_place" class="form-label">Arrival place</label>-->
+            <!--                            <input id="arrival_place" name="arrivalPlace" class="form-control" list="datalistOptions"-->
+            <!--                                   placeholder="Arrival palce">-->
+
+            <!--                            <datalist id="datalistOptions">-->
+            <!--                                <div th:each="arrival: ${arrivalResponse.getTrainsArrivalPlaces()}">-->
+            <!--                                    <option th:value="${arrival}"></option>-->
+            <!--                                </div>-->
+            <!--                            </datalist>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="col">-->
+            <!--                            <label for="departure_date" class="form-label">Departure date</label>-->
+            <!--                            <input id="departure_date" name="departureDate" class="form-control me-2" type="date"-->
+            <!--                                   placeholder="Departure date" aria-label="Search">-->
+            <!--                        </div>-->
+
+            <!--                        <div class="col">-->
+            <!--                            <label for="departure_time" class="form-label">Departure time</label>-->
+            <!--                            <input id="departure_time" name="departureTime" class="form-control me-2" type="time"-->
+            <!--                                   placeholder="Departure time" aria-label="Search">-->
+            <!--                        </div>-->
+
+            <!--                        <div class="col-sm-6 col-md-1">-->
+            <!--                            <button class="btn btn-outline-primary mt-4" type="submit">Search</button>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </form>
 </div>
