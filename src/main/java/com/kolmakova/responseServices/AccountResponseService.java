@@ -1,8 +1,8 @@
 package com.kolmakova.responseServices;
 
-import com.kolmakova.dto.AccountDto;
-import com.kolmakova.responses.AccountResponse;
+import com.kolmakova.dto.AccountDTO;
+import com.kolmakova.responses.AccountExistsResponse;
 
 public interface AccountResponseService {
-    AccountResponse registerNewUser(AccountDto accountDto);
+    AccountExistsResponse registerNewUser(AccountDTO accountDto);
 }

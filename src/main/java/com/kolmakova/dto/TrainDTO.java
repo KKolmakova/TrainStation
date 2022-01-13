@@ -90,18 +90,6 @@ public class TrainDTO {
     public void setDepartureTimeStr(String departureTimeStr) {
         this.departureTimeStr = departureTimeStr;
     }
-
-    @Override
-    public String toString() {
-        return "TrainDTO{" +
-                "id=" + id +
-                ", number=" + number +
-                ", arrivalPlace='" + arrivalPlace + '\'' +
-                ", departureDate=" + departureDate +
-                ", departureTime='" + departureTime + '\'' +
-                ", kilometers=" + kilometers +
-                '}';
-    }
 }
 
 

@@ -1,7 +1,7 @@
 package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PassengerDTO;
-import com.kolmakova.responseServices.ReceiptsResponseService;
+import com.kolmakova.responseServices.ReceiptListResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.impl.PassengerServiceImpl;
 import com.kolmakova.utils.Converter;
@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class ReceiptsResponseServiceImpl implements ReceiptsResponseService {
+public class ReceiptListResponseServiceImpl implements ReceiptListResponseService {
 
     @Autowired
     private PassengerServiceImpl passengerService;

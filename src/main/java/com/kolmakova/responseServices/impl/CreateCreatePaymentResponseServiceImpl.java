@@ -5,7 +5,7 @@ import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.*;
-import com.kolmakova.responseServices.PaymentResponseService;
+import com.kolmakova.responseServices.CreatePaymentResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.*;
 import com.kolmakova.utils.Converter;
@@ -22,8 +22,9 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class PaymentResponseServiceImpl implements PaymentResponseService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentResponseServiceImpl.class);
+public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResponseService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateCreatePaymentResponseServiceImpl.class);
 
     @Autowired
     private PaymentService paymentService;

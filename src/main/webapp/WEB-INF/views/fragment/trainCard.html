@@ -1,0 +1,42 @@
+<div th:fragment="trainCard" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="card border-light mb-3" align="left"
+         style="max-width: 30rem;padding-right: 0px;padding-left: 0px; margin-left: 55px;">
+        <div class="card-header" align="center" th:text="#{user.payment.label.trainData}"></div>
+        <div class="card-body text-dark">
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.find.label.number}"></h6>
+                <p class="card-text" th:text="${response.getTrainDTO().getNumber()}"></p>
+            </div>
+
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.search.label.arrival}"></h6>
+                <p class="card-text" th:text="${response.getTrainDTO().getArrivalPlace()}"></p>
+            </div>
+
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.search.label.date}"></h6>
+                <p class="card-text" th:text="${response.getTrainDTO().getDepartureDateStr()}"></p>
+            </div>
+
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.search.label.time}"></h6>
+                <p class="card-text" th:text="${response.getTrainDTO().getDepartureTimeStr()}"></p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.find.label.kilometers}"></h6>
+                <p class="card-text" th:text="${response.getTrainDTO().getKilometers()}">
+                </p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.find.label.comfort}"></h6>
+                <p class="card-text"
+                   th:text="${response.getPricingDTO().getComfortDTO().getType()}">
+                </p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.find.label.price}"></h6>
+                <p class="card-text" th:text="${response.getPricingDTO().getPrice() + ' BYN'}"></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 package com.kolmakova.controllers;
 
 import com.kolmakova.dto.TrainDTO;
-import com.kolmakova.responseServices.SearchResponseService;
+import com.kolmakova.responseServices.SearchTrainResponseService;
 import com.kolmakova.services.ArrivalPlacesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/search")
-public class SearchController {
+public class SearchTrainController {
 
     @Autowired
-    private SearchResponseService searchResponseService;
+    private SearchTrainResponseService searchTrainResponseService;
     @Autowired
     private ArrivalPlacesService arrivalPlacesService;
 
@@ -30,7 +30,7 @@ public class SearchController {
     public String findSelected(Model model, TrainDTO trainDTO) {
         model.addAttribute("found", true);
         model.addAttribute("search", true);
-        model.addAttribute("response", searchResponseService.getResponse(trainDTO));
+        model.addAttribute("response", searchTrainResponseService.getResponse(trainDTO));
         model.addAttribute("arrivalResponse", arrivalPlacesService.getResponse());
 
         return "trainStation";

@@ -2,13 +2,14 @@ package com.kolmakova.dto;
 
 import com.kolmakova.types.Constants;
 
-public class AccountDto {
+public class AccountDTO {
+
     private long id;
     private String username;
     private String password;
     private String role;
 
-    public AccountDto() {
+    public AccountDTO() {
 //       setup default values
         role = Constants.USER_AUTHORITY;
     }

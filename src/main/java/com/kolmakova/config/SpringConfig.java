@@ -172,7 +172,7 @@ public class SpringConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         localeChangeInterceptor.setIgnoreInvalidLocale(true);
 
-        registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
+        registry.addInterceptor(localeChangeInterceptor);
 
 //        security
         registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/{id}");

@@ -1,12 +1,13 @@
 package com.kolmakova.responses;
 
-public class AccountResponse {
+public class AccountExistsResponse {
+
     private boolean userAlreadyExists;
 
-    public AccountResponse() {
+    public AccountExistsResponse() {
     }
 
-    public AccountResponse(boolean userAlreadyExists) {
+    public AccountExistsResponse(boolean userAlreadyExists) {
         this.userAlreadyExists = userAlreadyExists;
     }
 

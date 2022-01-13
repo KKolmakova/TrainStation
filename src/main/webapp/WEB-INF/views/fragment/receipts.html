@@ -1,41 +1,78 @@
-<div th:fragment="receipts">
-    <table class="table table-striped mt-4">
-        <tr>
-            <th>Train number</th>
-            <th>Arrival place</th>
-            <th>Departure date</th>
-            <th>Comfort type</th>
-            <th>Price</th>
-            <th>Details</th>
-        </tr>
-        <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}"
-             th:with="train=${pricing.getTrainDTO()}">
-            <tr>
-                <td>
-                    <p th:text="${train.getNumber()}"></p>
-                </td>
-                <td>
-                    <p th:text="${train.getArrivalPlace()}"></p>
-                </td>
-                <td>
-                    <p th:text="${train.getDepartureDateStr()}"></p>
-                </td>
-                <td>
-                    <p th:text="${pricing.getPricingDTO().getComfortDTO().getType()}"></p>
-                </td>
-                <td>
-                    <p th:text="${pricing.getPricingDTO().getPrice() + ' BYN'}"></p>
-                </td>
-                <td>
-                    <form th:method="GET" th:action="@{/payment/__${pricing.getId()}__}">
-                        <button class="btn btn-outline-primary" type="submit">Details</button>
-                    </form>
-                </td>
-            </tr>
-        </div>
-    </table>
+<div th:fragment="receipts" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <form th:method="GET" th:action="@{/search}">
-        <button class="btn btn-outline-primary" type="submit">Return to train search</button>
-    </form>
+    <div class="row">
+        <div class="col-3">
+            <div class="row mt-4">
+                <div class="card border-dark mb-3"
+                     style="max-width: 18rem;padding-right: 0px;padding-left: 0px;">
+                    <h5 class="card-header" th:text="#{user.receipts.label.passengerInfo}"></h5>
+                    <div class="card-body text-dark">
+                        <h6 class="card-title" th:text="#{user.registration.label.name}"></h6>
+                        <p class="card-text" th:text="${response.getPassengerDTO().getName()}"></p>
+
+                        <h6 class="card-title" th:text="#{user.registration.label.surname}"></h6>
+                        <p class="card-text" th:text="${response.getPassengerDTO().getSurname()}"></p>
+
+                        <h6 class="card-title" th:text="#{user.registration.label.documentType}"></h6>
+                        <p class="card-text"
+                           th:text="${response.getPassengerDTO().getDocumentType().getType().getDisplayName()}"></p>
+
+                        <h6 class="card-title" th:text="#{user.registration.label.documentSeries}"></h6>
+                        <p class="card-text" th:text="${response.getPassengerDTO().getDocumentSeries()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:if="${response.getPassengerDTO().getPaymentDTOList().isEmpty()}">
+            <div class="col mt-4">
+                <div class="alert alert-primary" role="alert" th:text="#{user.receipts.alert.noReceipts}"></div>
+                <form th:method="GET"
+                      th:action="@{/passengerList}">
+                    <button class="btn btn-outline-primary mb-3" type="submit"
+                            th:text="#{user.receipts.button.return}"></button>
+                </form>
+            </div>
+        </th:block>
+
+        <th:block th:if="${not response.getPassengerDTO().getPaymentDTOList().isEmpty()}">
+            <div class="col-9 mt-3">
+                <table class="table table-striped mt-4">
+                    <tr>
+                        <th th:text="#{user.registration.label.trainNumber}"></th>
+                        <th th:text="#{user.search.label.arrival}"></th>
+                        <th th:text="#{user.search.label.date}"></th>
+                        <th th:text="#{user.find.label.comfort}"></th>
+                        <th th:text="#{user.find.label.price}"></th>
+                        <th th:text="#{user.receipts.label.details}"></th>
+                    </tr>
+                    <div th:each="pricing: ${response.getPassengerDTO().getPaymentDTOList()}"
+                         th:with="train=${pricing.getTrainDTO()}">
+                        <tr>
+                            <td>
+                                <p th:text="${train.getNumber()}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${train.getArrivalPlace()}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${train.getDepartureDateStr()}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${pricing.getPricingDTO().getComfortDTO().getType()}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${pricing.getPricingDTO().getPrice() + ' BYN'}"></p>
+                            </td>
+                            <td>
+                                <form th:method="GET" th:action="@{/payment/__${pricing.getId()}__}">
+                                    <button class="btn btn-outline-primary" type="submit" th:text="#{user.receipts.button.details}"></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </th:block>
+    </div>
 </div>

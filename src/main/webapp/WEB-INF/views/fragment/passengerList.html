@@ -1,0 +1,43 @@
+<div th:fragment="passengerList" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container-xxl">
+        <table class="table table-striped">
+            <div class="row mt-3">
+                <tr>
+                    <th>№</th>
+                    <th th:text="#{user.registration.label.name}"></th>
+                    <th th:text="#{user.registration.label.surname}"></th>
+                    <th th:text="#{user.registration.label.documentType}"></th>
+                    <th th:text="#{user.registration.label.documentSeries}"></th>
+                    <th th:text="#{user.passengerList.label.receipts}"></th>
+
+                </tr>
+                <div th:each="passenger,state: ${response.getPassengerDTOList()}">
+                    <tr>
+                        <td>
+                            <p th:text="${state.index + 1}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${passenger.getName()}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${passenger.getSurname()}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${passenger.getDocumentType().getType().getDisplayName()}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${passenger.getDocumentSeries()}"></p>
+                        </td>
+                        <td>
+                            <form th:method="GET" th:action="@{/payment/passenger/__${passenger.getId()}__/receipts}">
+                                <button class="btn btn-outline-primary" type="submit" th:text="#{user.passengerList.button.open}"></button>
+                                <br>
+                            </form>
+                        </td>
+                    </tr>
+                </div>
+            </div>
+        </table>
+    </div>
+</div>
+

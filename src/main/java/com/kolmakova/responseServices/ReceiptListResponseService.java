@@ -2,7 +2,7 @@ package com.kolmakova.responseServices;
 
 import com.kolmakova.responses.PaymentResponse;
 
-public interface ReceiptsResponseService {
+public interface ReceiptListResponseService {
 
     PaymentResponse getResponse(int passengerId);
 }

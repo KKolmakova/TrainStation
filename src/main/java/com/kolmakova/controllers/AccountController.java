@@ -1,8 +1,8 @@
 package com.kolmakova.controllers;
 
-import com.kolmakova.dto.AccountDto;
+import com.kolmakova.dto.AccountDTO;
 import com.kolmakova.responseServices.AccountResponseService;
-import com.kolmakova.responses.AccountResponse;
+import com.kolmakova.responses.AccountExistsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -46,8 +45,8 @@ public class AccountController {
     }
 
     @PostMapping("/signUp")
-    public String signIn(HttpServletRequest request, Model model, AccountDto accountDto) {
-        AccountResponse response = accountResponseService.registerNewUser(accountDto);
+    public String signIn(HttpServletRequest request, Model model, AccountDTO accountDTO) {
+        AccountExistsResponse response = accountResponseService.registerNewUser(accountDTO);
 
         if (response.isUserAlreadyExists()) {
             model.addAttribute("signUp", true);

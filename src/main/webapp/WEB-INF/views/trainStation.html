@@ -25,8 +25,8 @@
         <div th:include="fragment/find.html::find"></div>
     </th:block>
 
-    <th:block th:if="${registration}">
-        <div th:include="fragment/registrate.html::registrate"></div>
+    <th:block th:if="${registerOnTrain}">
+        <div th:include="fragment/registerOnTrain.html::registerOnTrain"></div>
     </th:block>
 
     <th:block th:if="${payment}">
@@ -37,13 +37,9 @@
         <div th:include="fragment/receipts.html::receipts"></div>
     </th:block>
 
-<!--    <th:block th:if="${signIn}">-->
-<!--        <div th:include="security.html::signIn"></div>-->
-<!--    </th:block>-->
-
-<!--    <th:block th:if="${signUp}">-->
-<!--        <div th:include="security.html::signUp"></div>-->
-<!--    </th:block>-->
+    <th:block th:if="${passengerList}">
+        <div th:include="fragment/passengerList.html::passengerList"></div>
+    </th:block>
 </div>
 
 <!-- JavaScript Bundle with Popper -->

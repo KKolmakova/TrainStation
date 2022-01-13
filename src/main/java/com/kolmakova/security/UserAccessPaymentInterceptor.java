@@ -21,11 +21,11 @@ import static com.kolmakova.security.utils.HttpRequestUtils.ACCESS_DENIED_MESSAG
 
 @Component("userAccessPaymentInterceptor")
 public class UserAccessPaymentInterceptor implements HandlerInterceptor {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(UserAccessPaymentInterceptor.class);
 
     private static final String ID_PATH_VARIABLE = "id";
     private static final String PASSENGER_ID_PATH_VARIABLE = "passengerId";
-
 
     @Autowired
     private PassengerService passengerService;

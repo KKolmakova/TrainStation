@@ -1,13 +1,13 @@
 package com.kolmakova.types;
 
-public enum WagonType {
+public enum ComfortType {
 
     RESERVED_SEAT("Reserved seat"),
     COMPARTMENT("Compartment");
 
     private String displayType;
 
-    WagonType(String displayType) {
+    ComfortType(String displayType) {
         this.displayType = displayType;
     }
 

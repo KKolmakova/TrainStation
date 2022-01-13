@@ -4,7 +4,7 @@ import com.kolmakova.responses.RegistrationOnTrainResponse;
 
 import java.util.List;
 
-public interface RegistrationResponseService {
+public interface RegistrationOnTrainResponseService {
 
     RegistrationOnTrainResponse getResponse(Integer pricingId);
 }

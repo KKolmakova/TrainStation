@@ -1,4 +1,4 @@
-<div th:fragment="registrate">
+<div th:fragment="registerOnTrain" xmlns:th="http://www.w3.org/1999/xhtml">
     <form th:method="POST" th:action="@{/payment/create}">
 
         <input hidden name="trainId" th:value="${response.getSelectTrainDTO().getId()}"/>
@@ -10,33 +10,37 @@
                     <div class="col-5">
                         <div class="card text-dark bg-light mb-1" style="max-width: 30rem;">
                             <h5 class="card-header"
-                                th:text="${'Train number: '+ response.getSelectTrainDTO().getNumber()}"></h5>
+                                th:text="#{user.registration.label.trainInfo}"></h5>
                             <div class="card-body">
-                                <h6 class="card-title">Arrival point</h6>
+                                <h6 class="card-title" th:text="#{user.registration.label.trainNumber}"></h6>
+                                <p class="card-text" th:text="${response.getSelectTrainDTO().getNumber()}"></p>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title" th:text="#{user.search.label.arrival}"></h6>
                                 <p class="card-text" th:text="${response.getSelectTrainDTO().getArrivalPlace()}"></p>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title">Departure date</h6>
+                                <h6 class="card-title" th:text="#{user.search.label.date}"></h6>
                                 <p class="card-text" th:text="${response.getSelectTrainDTO().getDepartureDateStr()}">
                                 </p>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title">Departure time</h6>
+                                <h6 class="card-title" th:text="#{user.search.label.time}"></h6>
                                 <p class="card-text" th:text="${response.getSelectTrainDTO().getDepartureTimeStr()}">
                                 </p>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title">Kilometers</h6>
+                                <h6 class="card-title" th:text="#{user.find.label.kilometers}"></h6>
                                 <p class="card-text" th:text="${response.getSelectTrainDTO().getKilometers()}">
                                 </p>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title">Comfort type</h6>
+                                <h6 class="card-title" th:text="#{user.find.label.comfort}"></h6>
                                 <p class="card-text" th:text="${response.getPricingDTO().getComfortDTO().getType()}">
                                 </p>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title">Price</h6>
+                                <h6 class="card-title" th:text="#{user.find.label.price}"></h6>
                                 <p class="card-text" th:text="${response.getPricingDTO().getPrice() + ' BYN'}"></p>
                             </div>
                         </div>
@@ -45,30 +49,30 @@
                     <div class="col-7">
                         <div class="card border-light mb-3"
                              style="max-width: 45rem;padding-right: 0px;padding-left: 0px;">
-                            <div class="card-header">Enter registration data</div>
+                            <div class="card-header" th:text="#{user.registration.label.enter}"></div>
                             <div class="card-body text-dark">
                                 <div class="mb-2">
-                                    <label for="name" class="form-label">Name</label>
+                                    <label for="name" class="form-label" th:text="#{user.registration.label.name}"></label>
                                     <input class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="mb-2">
-                                    <label for="surname" class="form-label mt-3">Surname</label>
+                                    <label for="surname" class="form-label mt-3" th:text="#{user.registration.label.surname}"></label>
                                     <input class="form-control" id="surname" name="surname" required>
                                 </div>
                                 <div class="mb-2">
-                                    <label for="document_type" class="form-label mt-3">Document type</label>
+                                    <label for="document_type" class="form-label mt-3" th:text="#{user.registration.label.documentType}"></label>
                                     <select class="form-select" id="document_type" name="documentDTO.type">
-                                        <option value="PASSPORT">passport</option>
-                                        <option value="RESIDENT_CARD">resident card</option>
-                                        <option value="CERTIFICATE">certificate</option>
+                                        <option value="PASSPORT" th:text="#{user.registration.option.passport}"></option>
+                                        <option value="RESIDENT_CARD" th:text="#{user.registration.option.card}"></option>
+                                        <option value="CERTIFICATE" th:text="#{user.registration.option.certificate}"></option>
                                     </select>
                                 </div>
                                 <div class="mb-2">
-                                    <label for="document_series" class="form-label mt-3">Document series</label>
+                                    <label for="document_series" class="form-label mt-3" th:text="#{user.registration.label.documentSeries}"></label>
                                     <input class="form-control" id="document_series" name="documentSeries" required>
                                 </div>
                                 <div class="mb-2">
-                                    <button class="btn btn-outline-primary mt-3" align="right" type="submit">Registrate</button>
+                                    <button class="btn btn-outline-primary mt-3" align="right" type="submit" th:text="#{user.registration.button.register}"></button>
                                 </div>
                             </div>
                         </div>

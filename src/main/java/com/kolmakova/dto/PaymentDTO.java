@@ -47,15 +47,4 @@ public class PaymentDTO {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
-    @Override
-    public String toString() {
-        return "PaymentDTO{" +
-                "id=" + id +
-                ", trainDTO=" + trainDTO +
-                ", passengerDTO=" + passengerDTO +
-                ", pricingDTO=" + pricingDTO +
-                ", amount=" + amount +
-                '}';
-    }
 }

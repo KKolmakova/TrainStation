@@ -1,9 +1,9 @@
 package com.kolmakova.responseServices.impl;
 
-import com.kolmakova.dto.AccountDto;
+import com.kolmakova.dto.AccountDTO;
 import com.kolmakova.entities.Account;
 import com.kolmakova.responseServices.AccountResponseService;
-import com.kolmakova.responses.AccountResponse;
+import com.kolmakova.responses.AccountExistsResponse;
 import com.kolmakova.services.AccountService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class AccountResponseServiceImpl implements AccountResponseService {
     private Converter converter;
 
     @Override
-    public AccountResponse registerNewUser(AccountDto accountDto) {
-        AccountResponse response = new AccountResponse(true);
+    public AccountExistsResponse registerNewUser(AccountDTO accountDto) {
+        AccountExistsResponse response = new AccountExistsResponse(true);
         Account accountToSave = converter.convertToAccount(accountDto);
 
         if (userNotExists(accountToSave)) {

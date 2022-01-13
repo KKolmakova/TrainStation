@@ -3,7 +3,7 @@ package com.kolmakova.responseServices.impl;
 import com.kolmakova.dto.PricingDTO;
 import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Train;
-import com.kolmakova.responseServices.RegistrationResponseService;
+import com.kolmakova.responseServices.RegistrationOnTrainResponseService;
 import com.kolmakova.responses.RegistrationOnTrainResponse;
 import com.kolmakova.services.impl.PricingServiceImpl;
 import com.kolmakova.services.impl.TrainServiceImpl;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RegistrationResponseServiceImpl implements RegistrationResponseService {
+public class RegistrationOnTrainResponseServiceImpl implements RegistrationOnTrainResponseService {
 
     @Autowired
     private TrainServiceImpl trainService;

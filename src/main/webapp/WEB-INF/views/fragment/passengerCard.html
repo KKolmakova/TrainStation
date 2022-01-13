@@ -1,0 +1,26 @@
+<div th:fragment="passengerCard" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="card border-light mb-3" align="left"
+         style="max-width: 30rem;padding-right: 0px;padding-left: 0px; margin-left: 55px;">
+        <div class="card-header" align="center" th:text="#{user.payment.label.passengerData}"></div>
+        <div class="card-body text-dark">
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.registration.label.name}"></h6>
+                <p class="card-text" th:text="${response.getPassengerDTO().getName()}"></p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.registration.label.surname}"></h6>
+                <p class="card-text" th:text="${response.getPassengerDTO().getSurname()}"></p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.registration.label.documentType}"></h6>
+                <p class="card-text"
+                   th:text="${response.getPassengerDTO().getDocumentType().getType().getDisplayName()}"></p>
+            </div>
+            <div class="card-body pt-1">
+                <h6 class="card-title" th:text="#{user.registration.label.documentSeries}"></h6>
+                <p class="card-text"
+                   th:text="${response.getPassengerDTO().getDocumentSeries()}"></p>
+            </div>
+        </div>
+    </div>
+</div>

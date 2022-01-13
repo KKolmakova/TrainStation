@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @Component
 public class Converter {
+
     private static final String DATE_FORMAT = "dd.MM.yyyy";
     private static final String TIME_FORMAT = "HH:mm";
 
@@ -102,6 +103,16 @@ public class Converter {
         return trainDTOList;
     }
 
+    public List<PassengerDTO> convertToPassengerDTOList(List<Passenger> passengerList) {
+        List<PassengerDTO> passengerDTOList = new ArrayList<>();
+
+        for (Passenger passenger : passengerList) {
+            passengerDTOList.add(convertToPassengerDTO(passenger));
+        }
+
+        return passengerDTOList;
+    }
+
     public Passenger convertToPassenger(PassengerDTO passengerDTO) {
         Passenger passenger = new Passenger();
 
@@ -117,7 +128,7 @@ public class Converter {
         return documentDTO;
     }
 
-    public Account convertToAccount(AccountDto accountDto) {
+    public Account convertToAccount(AccountDTO accountDto) {
         Account account = new Account();
 
         BeanUtils.copyProperties(accountDto, account);

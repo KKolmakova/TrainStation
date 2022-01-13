@@ -29,12 +29,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/user/signUp").permitAll()
-                .antMatchers("/registration/**", "/payment/**").hasAuthority(Constants.USER_AUTHORITY)
+                .antMatchers("/registration/**", "/payment/**", "/passengerList").hasAuthority(Constants.USER_AUTHORITY)
+
                 .and()
                 .formLogin()
                 .loginPage("/user/signIn")
                 .loginProcessingUrl("/login")
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/errors/403.html");
     }
 
     @Override

@@ -1,16 +1,16 @@
-<div th:fragment="find">
+<div th:fragment="find" xmlns:th="http://www.w3.org/1999/xhtml">
     <div th:each="train: ${response.getTrainDTOList()}">
         <table class="table table-striped mt-5">
             <tr>
-                <th>Number</th>
-                <th>Arrival place</th>
-                <th>Departure date</th>
-                <th>Departure time</th>
-                <th>Kilometers</th>
-                <th>Comfort type</th>
-                <th>Free seats</th>
-                <th>Price</th>
-                <th>Reserve button</th>
+                <th th:text="#{user.find.label.number}"></th>
+                <th th:text="#{user.search.label.arrival}"></th>
+                <th th:text="#{user.search.label.date}"></th>
+                <th th:text="#{user.search.label.time}"></th>
+                <th th:text="#{user.find.label.kilometers}"></th>
+                <th th:text="#{user.find.label.comfort}"></th>
+                <th th:text="#{user.find.label.seats}"></th>
+                <th th:text="#{user.find.label.price}"></th>
+                <th th:text="#{user.find.label.reserve}"></th>
             </tr>
             <tr>
                 <td >
@@ -31,23 +31,23 @@
                 <div th:with="pricingList=${train.getPricingDTOList()}">
                     <td>
                         <div th:each="pricing: ${pricingList}">
-                            <p th:text="${pricing.getComfortDTO().getType()}"></p>
+                            <p class="mb-4" th:text="${pricing.getComfortDTO().getType()}"></p>
                         </div>
                     </td>
                     <td>
                         <div th:each="pricing: ${pricingList}">
-                            <p th:text="${pricing.getSeatsNumber()}"></p>
+                            <p class="mb-4" th:text="${pricing.getSeatsNumber()}"></p>
                         </div>
                     </td>
                     <td>
                         <div th:each="pricing: ${pricingList}">
-                            <p th:text="${pricing.getPrice() + ' BYN'}"></p>
+                            <p class="mb-4" th:text="${pricing.getPrice() + ' BYN'}"></p>
                         </div>
                     </td>
                     <td>
                         <div th:each="pricing: ${pricingList}">
                             <form th:method="GET" th:action="@{/registration/pricing/__${pricing.getId()}__/print}">
-                                <button class="btn btn-outline-primary" type="submit">Reserve</button><br>
+                                <button class="btn btn-outline-primary mb-2" type="submit" th:text="#{user.find.button.reserve}"></button><br>
                             </form>
                         </div>
                     </td>
