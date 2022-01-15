@@ -22,9 +22,9 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResponseService {
+public class CreatePaymentResponseServiceImpl implements CreatePaymentResponseService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateCreatePaymentResponseServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePaymentResponseServiceImpl.class);
 
     @Autowired
     private PaymentService paymentService;

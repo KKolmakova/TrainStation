@@ -38,11 +38,12 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 public class SpringConfig implements WebMvcConfigurer {
 
+    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
+
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private Environment env;
-    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
 
     @Bean
     public DataSource dataSource() {
@@ -78,15 +79,6 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Autowired
-    @Bean
-    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
-
-        return transactionManager;
-    }
-
-    @Autowired
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -97,6 +89,17 @@ public class SpringConfig implements WebMvcConfigurer {
 
         return entityManagerFactoryBean;
     }
+
+    @Autowired
+    @Bean
+    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+
+        return transactionManager;
+    }
+
+    //    template
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -119,6 +122,8 @@ public class SpringConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
+    //    view
+
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
@@ -140,6 +145,8 @@ public class SpringConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/css/");
     }
 
+    //    interceptor
+
     @Autowired
     @Qualifier("userAccessPaymentInterceptor")
     private HandlerInterceptor userAccessPaymentInterceptor;
@@ -148,7 +155,22 @@ public class SpringConfig implements WebMvcConfigurer {
     @Qualifier("userAccessAllPaymentsInterceptor")
     private HandlerInterceptor userAccessAllPaymentsInterceptor;
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        //      locale
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        localeChangeInterceptor.setIgnoreInvalidLocale(true);
+
+        registry.addInterceptor(localeChangeInterceptor);
+
+        //      security
+        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/{id}");
+        registry.addInterceptor(userAccessAllPaymentsInterceptor).addPathPatterns("/payment/passenger/{passengerId}/receipts");
+    }
+
     //    localization
+
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -162,19 +184,5 @@ public class SpringConfig implements WebMvcConfigurer {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("ru"));
         return localeResolver;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-//      locale
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
-        localeChangeInterceptor.setIgnoreInvalidLocale(true);
-
-        registry.addInterceptor(localeChangeInterceptor);
-
-//        security
-        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/{id}");
-        registry.addInterceptor(userAccessAllPaymentsInterceptor).addPathPatterns("/payment/passenger/{passengerId}/receipts");
     }
 }

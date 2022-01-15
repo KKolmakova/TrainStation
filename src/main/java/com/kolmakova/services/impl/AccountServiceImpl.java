@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -23,6 +23,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Optional<Account> getOne(String username) {
+        LOGGER.info("User with username {}", username);
         return userRepository.findByUsername(username);
     }
 

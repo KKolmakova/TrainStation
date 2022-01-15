@@ -21,10 +21,9 @@ public class AccountController {
     @Autowired
     private AccountResponseService accountResponseService;
 
-   public static Object getPrincipal(){
-       return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-   }
+    public static Object getPrincipal() {
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
     @GetMapping({"/signIn", "/signIn/{registered}"})
     public String getSignInPage(@PathVariable(value = "registered", required = false) Boolean registered, Model model) {
