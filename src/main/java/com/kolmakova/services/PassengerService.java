@@ -5,7 +5,8 @@ import com.kolmakova.entities.Passenger;
 import java.util.List;
 
 public interface PassengerService {
-    Passenger getOne(int passengerId);
+
+    Passenger getById(int passengerId);
 
     Passenger save(Passenger passenger);
 

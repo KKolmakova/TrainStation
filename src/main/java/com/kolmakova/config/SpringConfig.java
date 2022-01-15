@@ -149,7 +149,6 @@ public class SpringConfig implements WebMvcConfigurer {
     private HandlerInterceptor userAccessAllPaymentsInterceptor;
 
     //    localization
-
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();

@@ -3,7 +3,8 @@ package com.kolmakova.services;
 import com.kolmakova.entities.Pricing;
 
 public interface PricingService {
-    Pricing getOne(int pricingId);
+
+    Pricing getById(int pricingId);
 
     Pricing save(Pricing pricing);
 }

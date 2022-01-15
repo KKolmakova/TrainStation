@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional
@@ -29,7 +28,7 @@ public class RegistrationOnTrainResponseServiceImpl implements RegistrationOnTra
     public RegistrationOnTrainResponse getResponse(Integer pricingId) {
         RegistrationOnTrainResponse registrationOnTrainResponse = new RegistrationOnTrainResponse();
 
-        PricingDTO pricingDTO = converter.convertToPricingDTO(pricingService.getOne(pricingId));
+        PricingDTO pricingDTO = converter.convertToPricingDTO(pricingService.getById(pricingId));
         TrainDTO trainDTO = converter.convertToTrainDTO(getTrain(pricingDTO.getTrainId()));
 
         registrationOnTrainResponse.setSelectTrainDTO(trainDTO);
@@ -39,12 +38,6 @@ public class RegistrationOnTrainResponseServiceImpl implements RegistrationOnTra
     }
 
     private Train getTrain(Integer trainId) {
-        return trainService.getOne(trainId);
-    }
-
-    private List<TrainDTO> getTrainDTOList(List<Integer> trainsIds) {
-        List<Train> trainList = trainService.findByIds(trainsIds);
-
-        return converter.convertToTrainDTOList(trainList);
+        return trainService.getById(trainId);
     }
 }

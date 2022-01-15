@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/user/signUp").permitAll()
+                .antMatchers("/resources/**","/", "/user/signUp").permitAll()
                 .antMatchers("/registration/**", "/payment/**", "/passengerList").hasAuthority(Constants.USER_AUTHORITY)
 
                 .and()
@@ -36,6 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/user/signIn")
                 .loginProcessingUrl("/login")
                 .permitAll()
+
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
 
                 .and()
                 .exceptionHandling()

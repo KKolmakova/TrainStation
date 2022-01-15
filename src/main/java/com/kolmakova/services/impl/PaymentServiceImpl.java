@@ -13,8 +13,8 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public Payment getOne(int checkId) {
-        return paymentRepository.findById(checkId).orElse(new Payment());
+    public Payment getById(int paymentId) {
+        return paymentRepository.findById(paymentId).orElse(new Payment());
     }
 
     @Override

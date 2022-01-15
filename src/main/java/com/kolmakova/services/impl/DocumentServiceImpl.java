@@ -16,7 +16,7 @@ public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private DocumentRepository documentRepository;
 
-    public Optional<Document> getDocuments(DocumentType type) {
+    public Optional<Document> getByType(DocumentType type) {
         return documentRepository.findByType(type);
     }
 }

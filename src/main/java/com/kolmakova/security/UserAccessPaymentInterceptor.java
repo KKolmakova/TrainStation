@@ -25,7 +25,6 @@ public class UserAccessPaymentInterceptor implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserAccessPaymentInterceptor.class);
 
     private static final String ID_PATH_VARIABLE = "id";
-    private static final String PASSENGER_ID_PATH_VARIABLE = "passengerId";
 
     @Autowired
     private PassengerService passengerService;
@@ -34,7 +33,7 @@ public class UserAccessPaymentInterceptor implements HandlerInterceptor {
 
     @Override
     @Transactional
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         Account account = httpRequestUtils.getFromRequest(request);
         Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
@@ -44,9 +43,12 @@ public class UserAccessPaymentInterceptor implements HandlerInterceptor {
 
         Integer paymentId = Integer.parseInt(pathVariables.get(ID_PATH_VARIABLE));
         boolean hasAccess = passengerService.containsPayment(account.getPassengers(), paymentId);
+
         if (!hasAccess) {
             throw new AccessDeniedException(ACCESS_DENIED_MESSAGE);
+            //need to be logged with .error
         }
+
         return true;
     }
 }

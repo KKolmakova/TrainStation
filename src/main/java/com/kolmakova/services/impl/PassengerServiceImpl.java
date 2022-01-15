@@ -17,7 +17,7 @@ public class PassengerServiceImpl implements PassengerService {
     private PassengerRepository passengerRepository;
 
     @Override
-    public Passenger getOne(int passengerId) {
+    public Passenger getById(int passengerId) {
         return passengerRepository.getOne(passengerId);
     }
 

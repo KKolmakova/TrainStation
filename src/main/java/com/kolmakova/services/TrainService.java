@@ -6,15 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface TrainService {
-    Train getOne(int id);
 
-    List<Integer> getTrainsId(List<Train> trains);
-
-    String getSelectedTrainsUrl(List<Train> trains);
-
-    List<Train> findByIds(List<Integer> id);
+    Train getById(int trainId);
 
     List<Train> getByParameters(String arrivalPlace, Date departureDate, Date departureTime);
 
-    List<String> getArrivalPlaces();
+    List<String> getAllArrivalPlaces();
 }

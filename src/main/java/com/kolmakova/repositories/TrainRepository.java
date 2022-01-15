@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 public interface TrainRepository extends JpaRepository<Train, Integer>, JpaSpecificationExecutor<Train> {
 
-    @Query(value = "SELECT t FROM Train t WHERE arrival_place LIKE :arrivalPlace")
-    List<Train> findTrainByArrival(@Param("arrivalPlace") String arrivalPlace);
-
     @Query(value = "SELECT DISTINCT t.arrivalPlace FROM Train t")
-    List<String> getArrivalPlaces();
+    List<String> getAllArrivalPlaces();
 }

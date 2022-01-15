@@ -50,7 +50,7 @@ public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResp
 
         Train train = getTrain(trainId);
 
-        Pricing pricing = pricingService.getOne(pricingId);
+        Pricing pricing = pricingService.getById(pricingId);
         Double amount = pricing.getPrice();
 
         savePricing(pricing);
@@ -74,7 +74,7 @@ public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResp
     public PaymentResponse getResponse(int paymentId) {
         PaymentResponse paymentResponse = new PaymentResponse();
 
-        Payment payment = paymentService.getOne(paymentId);
+        Payment payment = paymentService.getById(paymentId);
 
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(payment);
         PassengerDTO passengerDTO = converter.convertToPassengerDTO(payment.getPassenger());
@@ -91,7 +91,7 @@ public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResp
 
     private Passenger savePassenger(PassengerDTO passengerDTO) {
         Passenger passenger = converter.convertToPassenger(passengerDTO);
-        Optional<Document> document = documentService.getDocuments(passengerDTO.getDocumentDTO().getType());
+        Optional<Document> document = documentService.getByType(passengerDTO.getDocumentDTO().getType());
 
         passenger.setDocumentType(document.orElse(null));
         return passengerService.save(passenger);
@@ -119,6 +119,6 @@ public class CreateCreatePaymentResponseServiceImpl implements CreatePaymentResp
     }
 
     private Train getTrain(int trainId) {
-        return trainService.getOne(trainId);
+        return trainService.getById(trainId);
     }
 }

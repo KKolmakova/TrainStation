@@ -1,7 +1,7 @@
-package com.kolmakova.services;
+package com.kolmakova.responseServices;
 
 import com.kolmakova.responses.ArrivalPlaceListResponse;
 
-public interface ArrivalPlacesService {
+public interface ArrivalPlaceListResponseService {
     ArrivalPlaceListResponse getResponse();
 }

@@ -13,7 +13,7 @@ public class PricingServiceImpl implements PricingService {
     private PricingRepository pricingRepository;
 
     @Override
-    public Pricing getOne(int pricingId) {
+    public Pricing getById(int pricingId) {
         return pricingRepository.getOne(pricingId);
     }
 

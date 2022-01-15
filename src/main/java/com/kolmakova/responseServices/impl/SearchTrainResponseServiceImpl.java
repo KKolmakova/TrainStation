@@ -30,10 +30,7 @@ public class SearchTrainResponseServiceImpl implements SearchTrainResponseServic
         List<Train> trains = trainService.getByParameters(trainDTO.getArrivalPlace(), trainDTO.getDepartureDate(), trainDTO.getDepartureTime());
         List<TrainDTO> trainDTOList = getTrainsWithFreePlaces(converter.convertToTrainDTOList(trains));
 
-        String trainsIdsUrl = trainService.getSelectedTrainsUrl(trains);
-
         registrationOnTrainResponse.setTrainDTOList(trainDTOList);
-        registrationOnTrainResponse.setTrainsIds(trainsIdsUrl);
 
         return registrationOnTrainResponse;
     }

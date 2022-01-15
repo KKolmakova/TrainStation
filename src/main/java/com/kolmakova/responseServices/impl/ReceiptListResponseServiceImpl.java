@@ -22,7 +22,7 @@ public class ReceiptListResponseServiceImpl implements ReceiptListResponseServic
     public PaymentResponse getResponse(int passengerId){
         PaymentResponse paymentResponse = new PaymentResponse();
 
-        PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getOne(passengerId));
+        PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getById(passengerId));
         paymentResponse.setPassengerDTO(passengerDTO);
 
         return paymentResponse;
