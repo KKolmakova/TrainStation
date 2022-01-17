@@ -1,27 +1,34 @@
 <div th:fragment="payment" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container mt-4">
-        <div class="card text-center" style="max-width: 600rem">
-            <h6 class="card-header" th:text="#{user.payment.label.paymentInfo}"></h6>
-            <div class="card-body">
-                <div class="row mt-2">
-                    <div class="col">
+        <th:block th:if="${response.getPassengerDTO() == null or response.getTrainDTO() == null}">
+            <div class="alert alert-primary mt-5" role="alert" th:text="#{user.payment.alert.noPayment}"></div>
+        </th:block>
+
+        <th:block th:if="${response.getPassengerDTO() != null and response.getTrainDTO() != null}">
+            <div class="card text-center" style="max-width: 600rem">
+                <h6 class="card-header" th:text="#{user.payment.label.paymentInfo}"></h6>
+                <div class="card-body">
+                    <div class="row mt-2">
+                        <div class="col">
                             <div th:include="fragment/passengerCard.html::passengerCard"></div>
+                        </div>
+
+                        <div class="col">
+                            <div th:include="fragment/trainCard.html::trainCard"></div>
+                        </div>
                     </div>
 
-                    <div class="col">
-                        <div th:include="fragment/trainCard.html::trainCard"></div>
+                    <div class="row">
+                        <form th:method="GET"
+                              th:action="@{/payment/passenger/__${response.getPassengerDTO().getId()}__/receipts}">
+                            <button class="btn btn-outline-primary mb-3" type="submit"
+                                    th:text="#{user.payment.button.receipts}"></button>
+                        </form>
                     </div>
-                </div>
 
-                <div class="row">
-                    <form th:method="GET"
-                          th:action="@{/payment/passenger/__${response.getPassengerDTO().getId()}__/receipts}">
-                        <button class="btn btn-outline-primary mb-3" type="submit" th:text="#{user.payment.button.receipts}"></button>
-                    </form>
+                    <div class="card-footer text-muted" th:text="#{user.payment.label.deactivate}"></div>
                 </div>
-
-                <div class="card-footer text-muted" th:text="#{user.payment.label.deactivate}"></div>
             </div>
-        </div>
+        </th:block>
     </div>
 </div>

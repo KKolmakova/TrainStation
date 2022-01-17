@@ -1,5 +1,7 @@
 package com.kolmakova.entities;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Passenger {
     @Column(name = "document_series")
     private String documentSeries;
 
+    @Where(clause = "mark_as_deleted = false")
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "passenger_id")
     private List<Payment> paymentList;

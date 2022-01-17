@@ -6,7 +6,7 @@ import com.kolmakova.entities.Passenger;
 import com.kolmakova.responseServices.PassengerListResponseService;
 import com.kolmakova.responses.PassengerListResponse;
 import com.kolmakova.services.AccountService;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

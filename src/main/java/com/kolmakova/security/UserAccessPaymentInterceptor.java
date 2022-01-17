@@ -7,6 +7,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,8 +22,6 @@ import static com.kolmakova.security.utils.HttpRequestUtils.ACCESS_DENIED_MESSAG
 
 @Component("userAccessPaymentInterceptor")
 public class UserAccessPaymentInterceptor implements HandlerInterceptor {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserAccessPaymentInterceptor.class);
 
     private static final String ID_PATH_VARIABLE = "id";
 
@@ -46,7 +45,6 @@ public class UserAccessPaymentInterceptor implements HandlerInterceptor {
 
         if (!hasAccess) {
             throw new AccessDeniedException(ACCESS_DENIED_MESSAGE);
-            //need to be logged with .error
         }
 
         return true;

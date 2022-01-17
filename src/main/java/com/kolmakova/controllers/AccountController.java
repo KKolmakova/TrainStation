@@ -4,7 +4,6 @@ import com.kolmakova.dto.AccountDTO;
 import com.kolmakova.responseServices.AccountResponseService;
 import com.kolmakova.responses.AccountExistsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +19,6 @@ public class AccountController {
 
     @Autowired
     private AccountResponseService accountResponseService;
-
-    public static Object getPrincipal() {
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
 
     @GetMapping({"/signIn", "/signIn/{registered}"})
     public String getSignInPage(@PathVariable(value = "registered", required = false) Boolean registered, Model model) {

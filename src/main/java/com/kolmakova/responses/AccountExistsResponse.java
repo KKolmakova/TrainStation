@@ -4,9 +4,6 @@ public class AccountExistsResponse {
 
     private boolean userAlreadyExists;
 
-    public AccountExistsResponse() {
-    }
-
     public AccountExistsResponse(boolean userAlreadyExists) {
         this.userAlreadyExists = userAlreadyExists;
     }

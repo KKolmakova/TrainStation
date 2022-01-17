@@ -3,8 +3,8 @@ package com.kolmakova.responseServices.impl;
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.responseServices.ReceiptListResponseService;
 import com.kolmakova.responses.PaymentResponse;
-import com.kolmakova.services.impl.PassengerServiceImpl;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.services.PassengerService;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 public class ReceiptListResponseServiceImpl implements ReceiptListResponseService {
 
     @Autowired
-    private PassengerServiceImpl passengerService;
+    private PassengerService passengerService;
     @Autowired
     private Converter converter;
 

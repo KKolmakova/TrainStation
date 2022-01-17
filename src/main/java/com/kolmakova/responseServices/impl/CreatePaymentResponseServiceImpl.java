@@ -8,9 +8,8 @@ import com.kolmakova.entities.*;
 import com.kolmakova.responseServices.CreatePaymentResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.*;
-import com.kolmakova.utils.Converter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.kolmakova.util.Converter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -24,7 +23,7 @@ import java.util.Optional;
 @Transactional
 public class CreatePaymentResponseServiceImpl implements CreatePaymentResponseService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePaymentResponseServiceImpl.class);
+    private static final Logger LOG = Logger.getLogger(CreatePaymentResponseService.class);
 
     @Autowired
     private PaymentService paymentService;
@@ -109,12 +108,15 @@ public class CreatePaymentResponseServiceImpl implements CreatePaymentResponseSe
             account.setPassengers(passengers);
             accountService.save(account);
         } else {
-            LOGGER.error("Can't find account for user with login: {}", authenticated.getUsername());
+            LOG.error("Can't find account for user with login " + authenticated.getUsername());
         }
     }
 
     private void savePricing(Pricing pricing) {
         pricing.setSeatsNumber(pricing.getSeatsNumber() - 1);
+        LOG.info(String.format("One seat in train number %s with comfort type %s was reserved",
+                trainService.getById(pricing.getTrainId()).getNumber(), pricing.getComfortType().getType()));
+
         pricingService.save(pricing);
     }
 

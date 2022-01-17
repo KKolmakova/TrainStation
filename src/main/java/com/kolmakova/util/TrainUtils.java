@@ -1,4 +1,4 @@
-package com.kolmakova.utils;
+package com.kolmakova.util;
 
 import com.kolmakova.entities.Train;
 import org.apache.commons.lang3.StringUtils;

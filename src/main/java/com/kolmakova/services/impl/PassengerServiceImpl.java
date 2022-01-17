@@ -1,9 +1,11 @@
 package com.kolmakova.services.impl;
 
+import com.kolmakova.controllers.HomeController;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.repositories.PassengerRepository;
 import com.kolmakova.services.PassengerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Objects;
 
 @Service
 public class PassengerServiceImpl implements PassengerService {
+
+    private static final Logger LOG = Logger.getLogger(PassengerService.class);
 
     @Autowired
     private PassengerRepository passengerRepository;
@@ -23,6 +27,7 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Override
     public Passenger save(Passenger passenger) {
+        LOG.info(String.format("Save passenger with name %s", passenger.getName()));
         return passengerRepository.save(passenger);
     }
 

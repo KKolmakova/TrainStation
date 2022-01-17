@@ -5,8 +5,8 @@ import com.kolmakova.dto.TrainDTO;
 import com.kolmakova.entities.Train;
 import com.kolmakova.responseServices.SearchTrainResponseService;
 import com.kolmakova.responses.RegistrationOnTrainResponse;
-import com.kolmakova.services.impl.TrainServiceImpl;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.services.TrainService;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class SearchTrainResponseServiceImpl implements SearchTrainResponseService {
 
     @Autowired
-    private TrainServiceImpl trainService;
+    private TrainService trainService;
     @Autowired
     private Converter converter;
 
