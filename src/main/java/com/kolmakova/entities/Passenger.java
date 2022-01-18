@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
-@Table(name = "Passenger")
 @Entity
+@Table(name = "Passenger")
 public class Passenger {
 
     @Id

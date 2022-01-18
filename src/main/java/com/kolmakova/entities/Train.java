@@ -5,8 +5,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
-@Table(name = "Train")
 @Entity
+@Table(name = "Train")
 public class Train {
 
     @Id

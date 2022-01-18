@@ -4,8 +4,8 @@ import com.kolmakova.types.ComfortType;
 
 import javax.persistence.*;
 
-@Table(name = "Comfort")
 @Entity
+@Table(name = "Comfort")
 public class Comfort {
 
     @Id

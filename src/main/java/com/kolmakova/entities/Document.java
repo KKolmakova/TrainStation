@@ -4,9 +4,10 @@ import com.kolmakova.types.DocumentType;
 
 import javax.persistence.*;
 
-@Table(name = "Document")
 @Entity
+@Table(name = "Document")
 public class Document {
+
     @Id
     @Column(name = "id")
     private Integer id;

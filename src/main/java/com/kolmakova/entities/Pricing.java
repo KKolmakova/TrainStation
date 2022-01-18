@@ -2,8 +2,8 @@ package com.kolmakova.entities;
 
 import javax.persistence.*;
 
-@Table(name = "Pricing")
 @Entity
+@Table(name = "Pricing")
 public class Pricing {
 
     @Id
